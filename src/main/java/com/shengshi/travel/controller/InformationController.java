@@ -21,10 +21,14 @@ public class InformationController {
 	@Autowired
 	CustomerService customerService;
 	
-	@RequestMapping(value = "/publish", method = RequestMethod.POST)
-	public String publish(HttpServletRequest request, Information information, Customer customer){
-		customerService.publish(customer, information);
-		return "";
+	@RequestMapping(value = "/publish", method = RequestMethod.GET)
+	public String publish(){
+		return "publish";
+	}
+	
+	@RequestMapping(value = "/personal", method = RequestMethod.GET)
+	public String personal(){
+		return "personal";
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -32,6 +36,12 @@ public class InformationController {
 //		PageResults<Information> informations = informationService.list(type, pageNo);
 //		request.getSession().setAttribute("informations", informations);
 		return "list";
+	}
+	@RequestMapping(value = "/lift_list", method = RequestMethod.GET)
+	public String lift_list_information(){
+//		PageResults<Information> informations = informationService.list(type, pageNo);
+//		request.getSession().setAttribute("informations", informations);
+		return "lift-list";
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
