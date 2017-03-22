@@ -1,0 +1,103 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	String basePath = request.getContextPath();
+%>
+<div class="weui-tab">
+	<div class="weui-tab__panel">
+
+		<div class="weui-panel__bd">
+			<div class="weui-media-box weui-media-box_text">
+				<h4 class="weui-media-box__title">(有顺车)榆林→府谷</h4>
+				<ul class="weui-media-box__info">
+					<li class="weui-media-box__info__meta">1小时前</li>
+					<li
+						class="weui-media-box__info__meta weui-media-box__info__meta_extra">5人</li>
+					<li class="weui-media-box__info__meta">收藏</li>
+				</ul>
+			</div>
+		</div>
+		<div class="weui-panel__bd">
+			<div class="weui-media-box weui-media-box_text">
+				<h4 class="weui-media-box__title">基本信息</h4>
+				<div class="weui-form-preview__bd">
+					<div class="weui-form-preview__item">
+						<label class="weui-form-preview__label">类型</label> <span
+							class="weui-form-preview__value">有顺车(轿车)</span>
+					</div>
+					<div class="weui-form-preview__item">
+						<label class="weui-form-preview__label">出发时间</label> <span
+							class="weui-form-preview__value">2017-03-23 08:25</span>
+					</div>
+					<div class="weui-form-preview__item">
+						<label class="weui-form-preview__label">路线</label> <span
+							class="weui-form-preview__value">榆林→府谷</span>
+					</div>
+					<div class="weui-form-preview__item">
+						<label class="weui-form-preview__label">座位数</label> <span
+							class="weui-form-preview__value">4</span>
+					</div>
+				</div>
+			</div>
+			<div class="weui-media-box weui-media-box_text">
+				<h4 class="weui-media-box__title">路线信息</h4>
+				<div class="weui-form-preview__bd">
+					<div class="weui-form-preview__item">
+						<label class="weui-form-preview__label">路线距离</label> <span
+							class="weui-form-preview__value">174.311公里</span>
+					</div>
+					<div class="weui-form-preview__item">
+						<label class="weui-form-preview__label">预计耗时</label> <span
+							class="weui-form-preview__value">02小时18分钟</span>
+					</div>
+					<div class="weui-form-preview__item">
+						<label class="weui-form-preview__label">过路费</label> <span
+							class="weui-form-preview__value">约66元</span>
+					</div>
+				</div>
+			</div>
+			<div class="weui-media-box weui-media-box_text">
+				<h4 class="weui-media-box__title">其他说明</h4>
+				<p>一路顺风</p>
+				<p>联系我时，请说是在xx顺车上看到的，谢谢！</p>
+				<a>点击这里查看更多榆林到府谷的信息</a>
+			</div>
+			<div class="weui-media-box weui-media-box_text">
+				<h4 class="weui-media-box__title">联系方式</h4>
+				<div class="weui-form-preview__bd">
+					<div class="weui-form-preview__item">
+						<label class="weui-form-preview__label">联系人</label> <span
+							class="weui-form-preview__value">车主</span>
+					</div>
+					<div class="weui-form-preview__item">
+						<label class="weui-form-preview__label">联系方式</label> <span
+							class="weui-form-preview__value">1562321312323</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="weui-tabbar">
+		<a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
+			<span style="display: inline-block; position: relative;"> <img
+				src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+
+		</span>
+			<p class="weui-tabbar__label">有顺车</p>
+		</a> <a href="javascript:;" class="weui-tabbar__item"> <img
+			src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+			<p class="weui-tabbar__label">搭顺车</p>
+		</a> <a href="javascript:;" class="weui-tabbar__item"> <span
+			style="display: inline-block; position: relative;"> <img
+				src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+		</span>
+			<p class="weui-tabbar__label">发布</p>
+		</a> <a href="javascript:;" class="weui-tabbar__item"> <img
+			src="./images/icon_tabbar.png" alt="" class="weui-tabbar__icon">
+			<p class="weui-tabbar__label">我</p>
+		</a>
+	</div>
+</div>
+

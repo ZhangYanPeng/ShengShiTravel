@@ -15,6 +15,7 @@ import com.shengshi.travel.entity.Information;
 import com.shengshi.travel.service.CustomerService;
 
 @Controller
+@RequestMapping("customer")
 public class CustomerController {
 	
 	@Autowired

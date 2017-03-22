@@ -27,11 +27,11 @@ public class InformationController {
 		return "";
 	}
 	
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
-	public String list_information(HttpServletRequest request, int type, int pageNo){
-		PageResults<Information> informations = informationService.list(type, pageNo);
-		request.getSession().setAttribute("informations", informations);
-		return "";
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list_information(){
+//		PageResults<Information> informations = informationService.list(type, pageNo);
+//		request.getSession().setAttribute("informations", informations);
+		return "list";
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
@@ -41,11 +41,11 @@ public class InformationController {
 		return "";
 	}
 	
-	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public String view_information(HttpServletRequest request, long id){
-		Information information = informationService.get(id);
-		request.setAttribute("information", information);
-		return "";
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public String view_information(HttpServletRequest request){
+//		Information information = informationService.get(id);
+//		request.setAttribute("information", information);
+		return "view";
 	}
 	
 	@RequestMapping(value = "/focus", method = RequestMethod.POST)
