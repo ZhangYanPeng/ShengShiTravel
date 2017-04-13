@@ -23,8 +23,8 @@
 			<a>出发时间</a> <i class="fa fa-sort-up"></i>
 		</div>
 		<div class="weui-flex__item">
-			<a href="javascript:;" id="choosePos" style="color: #3498db;">地点选择</a> <i
-				class="fa fa-location-arrow"></i>
+			<a href="javascript:;" id="choosePos" style="color: #3498db;">地点选择</a>
+			<i class="fa fa-location-arrow"></i>
 		</div>
 		<div class="weui-skin_android" id="choosePos-actionsheet"
 			style="display: none">
@@ -64,16 +64,18 @@
 		</div>
 	</div>
 	<div class="weui-cells">
-		<a class="weui-cell weui-cell_access" href="./view?category=youshunche">
+		<a class="weui-cell weui-cell_access"
+			href="./view?category=youshunche">
 			<div class="weui-cell__hd">
-				<img
-					src="<%=basePath%>/dist/images/0.jpg"
-					alt="" style="width: 60px; margin-right: 5px; display: block">
+				<img src="<%=basePath%>/dist/images/0.jpg" alt=""
+					style="width: 60px; margin-right: 5px; display: block">
 			</div>
 			<div class="weui-cell__bd">
 				<p>榆林→府谷</p>
 				<p style="font-size: 13px; color: #888888">出发日期:03月22日17:00</p>
-				<p style="font-size: 13px; color: #888888"><span class="youshunche">有顺车</span> 李先生(车主)</p>
+				<p style="font-size: 13px; color: #888888">
+					<span class="youshunche">有顺车</span> 李先生(车主)
+				</p>
 			</div>
 			<div class="weui-cell__ft">
 				<p style="font-size: 13px; color: #888888">53分钟前发布</p>
@@ -81,15 +83,20 @@
 		</a>
 	</div>
 	<script type="text/javascript">
-		$('body').click(function(e){
+		$('body').click(function(e) {
 			var target = e.target;
-			if($(target).attr('id') == 'choosePos'){
+			if ($(target).attr('id') == 'choosePos') {
 				$('#choosePos-actionsheet').show();
-			}else if($(target).attr('id') == 'choosePosMask'){
+			} else if ($(target).attr('id') == 'choosePosMask') {
 				$('#choosePos-actionsheet').hide();
 			}
 		});
-
-	</script> </myBody>
+	</script> 
+	</myBody>
+	<myScript>
+		<script type="text/javascript">
+		 $('.weui-tabbar a:eq(0)').addClass('weui-bar__item_on'); 
+		</script>
+	</myScript>
 </body>
 </html>
