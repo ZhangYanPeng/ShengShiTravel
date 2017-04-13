@@ -10,6 +10,6 @@ public interface InformationService{
 	
 	public Information get(long id);
 	public int edit(Information information);
-	public PageResults<Information> list(int type, int pageNo);
+	public PageResults<Information> list(int type, int order, int pageNo);
 	public PageResults<Information> search(Information information, int type, int pageNo);
 }

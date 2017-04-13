@@ -4,7 +4,8 @@
 	<mapping decorator="/WEB-INF/views/decorators/main-decorator.jsp" />
 	<!-- 指明满足“/exclude.jsp*”的页面，将被排除，不被装饰 -->
 	<mapping path="/publish" exclue="true" /> 
-	
+	<mapping path="/customer/home" exclue="true" /> 
+	<mapping path="/customer/login" exclue="true" /> 
 	<!-- 自定义 tag 规则 -->
 	<content-processor>
 		<tag-rule-bundle class="com.shengshi.travel.support.SitemeshTagRuleBundle" />

@@ -1,12 +1,17 @@
 package com.shengshi.travel.controller;
 
+import java.util.Date;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shengshi.travel.entity.Customer;
 import com.shengshi.travel.entity.Information;
@@ -15,39 +20,54 @@ import com.shengshi.travel.service.InformationService;
 import com.shengshi.travel.support.PageResults;
 
 @Controller
+@RequestMapping("information")
 public class InformationController {
 	
 	@Autowired
 	InformationService informationService;
 	@Autowired
 	CustomerService customerService;
-	@Autowired
-	HttpSession session;
 	
-	@RequestMapping(value = "/publish", method = RequestMethod.GET)
-	public String publish(){
-		return "publish";
+	@RequestMapping(value = "/publish", method = RequestMethod.POST)
+	public @ResponseBody int publish(@RequestBody Map map){
+		Information information = new Information();
+		information.setCapacity(Integer.valueOf((String) map.get("capacity")));
+		information.setType(Integer.valueOf((String) map.get("type")));
+		information.setPublish_time(System.currentTimeMillis());
+		information.setStart_time(Long.valueOf((String) map.get("start_time")));
+		information.setStartpos((String) map.get("startpos"));
+		information.setDestination((String) map.get("destination"));
+		information.setCapacity(Integer.valueOf((String) map.get("capacity")));
+		information.setSet_num(Integer.valueOf((String) map.get("set_num")));
+		information.setDistance(Double.valueOf((String) map.get("distance")));
+		information.setTime(Double.valueOf((String) map.get("time")));
+		information.setRoad_toll(Double.valueOf((String) map.get("road_toll")));
+		information.setRemarks((String) map.get("remarks"));
+		information.setContact((String) map.get("contact"));
+		information.setContact_info((String) map.get("contact_info"));
+		Customer customer = new Customer();
+		customer.setOpenid((String) map.get("openid"));
+		customer = customerService.login(customer);
+		return customerService.publish(customer, information);
 	}
 	
-	@RequestMapping(value = "/personal", method = RequestMethod.GET)
-	public String personal(){
-		session.setAttribute("tab", "wo");
-		return "personal";
-	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list_information(){
-//		PageResults<Information> informations = informationService.list(type, pageNo);
-//		request.getSession().setAttribute("informations", informations);
-		session.setAttribute("tab", "youshunche");
+	public String list(String openid){
 		return "list";
 	}
+	
 	@RequestMapping(value = "/lift_list", method = RequestMethod.GET)
-	public String lift_list_information(){
-//		PageResults<Information> informations = informationService.list(type, pageNo);
-//		request.getSession().setAttribute("informations", informations);
-		session.setAttribute("tab", "dashunche");
+	public String lift_list(String openid){
 		return "lift-list";
+	}
+	
+	@RequestMapping(value = "/get_list", method = RequestMethod.POST)
+	public @ResponseBody PageResults<Information> list_information(@RequestBody Map map){
+		int type = Integer.valueOf((String) map.get("type"));
+		int order = Integer.valueOf((String) map.get("order"));
+		int pageNo = Integer.valueOf((String) map.get("pageNo"));
+		return informationService.list(type, order, pageNo);
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
@@ -57,16 +77,11 @@ public class InformationController {
 		return "";
 	}
 	
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String view_information(HttpServletRequest request,String category){
+	@RequestMapping(value = "/view", method = RequestMethod.POST)
+	public String view_information(HttpServletRequest request){
 //		Information information = informationService.get(id);
 //		request.setAttribute("information", information);
-		if(category.equals("youshunche")){
-			return "view";
-		}else{
-			return "lift-view";
-		}
-		
+		return "view";
 	}
 	
 	@RequestMapping(value = "/focus", method = RequestMethod.POST)

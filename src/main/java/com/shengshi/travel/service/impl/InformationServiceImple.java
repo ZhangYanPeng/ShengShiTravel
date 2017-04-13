@@ -38,43 +38,43 @@ public class InformationServiceImple implements InformationService {
 
 	@Override
 	@Transactional
-	public PageResults<Information> list(int type, int pageNo) {
+	public PageResults<Information> list(int type,int order, int pageNo) {
 		// TODO Auto-generated method stub
-		return this.search(new Information(-1),type,pageNo);
+		Information information = new Information(-1);
+		information.setType(type);
+		return this.search(information,order,pageNo);
 	}
 
 	@Override
 	@Transactional
-	public PageResults<Information> search(Information information, int type, int pageNo) {
+	public PageResults<Information> search(Information information, int order, int pageNo) {
 		// TODO Auto-generated method stub
-		String hql = "from Information information";
-		String countHql = "select count(*) from Information information";
-		List<Information> informations = new ArrayList<Information>();
-		if(information.getId()==-1){
-			hql += " where information.type=?";
-			if(type==Constants.order_by_publish_time){
-				hql += "order by information.publish_time desc";
+		String hql = "from Information information where information.type=?";
+		String countHql = "select count(*) from Information information where information.type=?";
+		if(information.getId()!=-1){
+			if( information.getStartpos()!=null && !information.getStartpos().equals("")){
+				hql += " and information.startpos=?";
+				countHql += " and information.startpos=?";
 			}
-			else{
-				hql += "order by information.publish_time asc";
+			if( information.getDestination()!=null && !information.getDestination().equals("")){
+				hql += " and information.destination=?";
+				countHql += " and information.destination=?";
 			}
-			countHql += " where information.type=?";
-			Object[] values = {type};
-			return informationDAO.findPageByFetchedHql(hql, countHql, pageNo, Constants.pageSize, values);
+		}
+		if(order==Constants.order_by_publish_time_asc){
+			hql += " order by information.publish_time asc";
+		}
+		else if(order==Constants.order_by_publish_time_asc){
+			hql += " order by information.publish_time desc";
+		}
+		else if(order==Constants.order_by_start_time_asc){
+			hql += " order by information.start_time asc";
 		}
 		else{
-			hql += " where information.type=? and information.startpos=? and information.destination=?";
-			if(type==Constants.order_by_publish_time){
-				hql += "order by information.publish_time desc";
-			}
-			else{
-				hql += "order by information.publish_time asc";
-			}
-			countHql += " where information.type=?";
-			Object[] values = {type,information.getStartpos(),information.getDestination()};
-			return informationDAO.findPageByFetchedHql(hql, countHql, pageNo, Constants.pageSize, values);
+			hql += " order by information.start_time desc";
 		}
-	
+		Object[] values = {information.getType()};
+		return informationDAO.findPageByFetchedHql(hql, countHql, pageNo, Constants.pageSize, values);
 	}
 
 }
