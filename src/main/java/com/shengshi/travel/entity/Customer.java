@@ -33,9 +33,11 @@ public class Customer {
 	private String privilege;
 	private String unionid;
 	
+	private String phone;
+	
 	private String focus;//收藏
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "customer_id")
 	private List<Information> informations;
 	
@@ -44,6 +46,16 @@ public class Customer {
 	}
 	
 	
+	public String getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
 	public long getId() {
 		return id;
 	}

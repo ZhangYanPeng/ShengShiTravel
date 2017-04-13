@@ -22,8 +22,8 @@ public class Information {
 	private long id;
 	
 	private int type;//有顺车，搭顺车
-	private Date publish_time;
-	private Date start_time;
+	private long publish_time;
+	private long start_time;
 	
 	private String startpos;
 	private String destination;
@@ -67,19 +67,19 @@ public class Information {
 		this.type = type;
 	}
 
-	public Date getPublish_time() {
+	public long getPublish_time() {
 		return publish_time;
 	}
 
-	public void setPublish_time(Date publish_time) {
+	public void setPublish_time(long publish_time) {
 		this.publish_time = publish_time;
 	}
 
-	public Date getStart_time() {
+	public long getStart_time() {
 		return start_time;
 	}
 
-	public void setStart_time(Date start_time) {
+	public void setStart_time(long start_time) {
 		this.start_time = start_time;
 	}
 

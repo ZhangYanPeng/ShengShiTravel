@@ -32,6 +32,30 @@
 			</div>
 		</a>
 	</div>
-	</myBody>
+
+	<script type="text/javascript">
+		var openid = getUrlParam("openid");
+		$.ajax({
+			async : false,
+			cache : false,
+			type : 'POST',
+			contentType: "application/json", 
+			dataType : 'json',
+			data :
+				JSON.stringify({ 
+					"order" : "1",
+					"type":"1",
+					"pageNo" : "1" 
+				}),
+			url : "<%=basePath%>/information/get_list",
+			error : function(data) {// 请求失败处理函数
+				console.log(data);
+				alert("获取数据失败！");
+			},
+			success : function(data) {
+				console.log(data);
+			}
+		});
+	</script> </myBody>
 </body>
 </html>
