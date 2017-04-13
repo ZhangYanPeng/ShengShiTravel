@@ -58,5 +58,10 @@
 		</div>
 	</div>
 	</myBody>
+		<myScript>
+		<script type="text/javascript">
+		 $('.weui-tabbar a:eq(3)').addClass('weui-bar__item_on'); 
+		</script>
+	</myScript>
 </body>
 </html>

@@ -38,13 +38,13 @@ public class CustomerController {
 	@RequestMapping(value = "/login_give", method = RequestMethod.POST)
 	public @ResponseBody String login_give(@RequestBody Customer customer){
 		customer = customerService.login(customer);
-		return "http://localhost:8080/travel/information/list?openid="+customer.getOpenid();
+		return "http://localhost:8080/travel/list?openid="+customer.getOpenid();
 	}
 	
 	@RequestMapping(value = "/login_take", method = RequestMethod.POST)
 	public @ResponseBody String login_take(@RequestBody Customer customer){
 		customer = customerService.login(customer);
-		return "http://localhost:8080/travel/information/list?openid="+customer.getOpenid();
+		return "http://localhost:8080/travel/lift_list?openid="+customer.getOpenid();
 	}
 
 	@RequestMapping(value = "/view", method = RequestMethod.POST)

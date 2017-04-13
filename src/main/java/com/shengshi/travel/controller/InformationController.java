@@ -37,10 +37,9 @@ public class InformationController {
 		information.setStart_time(Long.valueOf((String) map.get("start_time")));
 		information.setStartpos((String) map.get("startpos"));
 		information.setDestination((String) map.get("destination"));
-		information.setCapacity(Integer.valueOf((String) map.get("capacity")));
-		information.setSet_num(Integer.valueOf((String) map.get("set_num")));
-		information.setDistance(Double.valueOf((String) map.get("distance")));
-		information.setTime(Double.valueOf((String) map.get("time")));
+		//TODO
+		//information.setDistance(Double.valueOf((String) map.get("distance")));
+		//information.setTime(Double.valueOf((String) map.get("time")));
 		information.setRoad_toll(Double.valueOf((String) map.get("road_toll")));
 		information.setRemarks((String) map.get("remarks"));
 		information.setContact((String) map.get("contact"));
@@ -51,16 +50,6 @@ public class InformationController {
 		return customerService.publish(customer, information);
 	}
 	
-	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(String openid){
-		return "list";
-	}
-	
-	@RequestMapping(value = "/lift_list", method = RequestMethod.GET)
-	public String lift_list(String openid){
-		return "lift-list";
-	}
 	
 	@RequestMapping(value = "/get_list", method = RequestMethod.POST)
 	public @ResponseBody PageResults<Information> list_information(@RequestBody Map map){

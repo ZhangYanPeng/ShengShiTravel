@@ -16,12 +16,12 @@
 <link rel="stylesheet" href="<%=basePath%>/dist/css/style.css">
 <script type="text/javascript" src="<%=basePath%>/dist/lib/jquery/jquery.js"></script>
 <script type="text/javascript">
-function getUrlParam(name)
-{
-var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-if (r!=null) return unescape(r[2]); return null; //返回参数值
-} 
+	function getUrlParam(name)
+	{
+	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+	var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+	if (r!=null) return unescape(r[2]); return null; //返回参数值
+	} 
 </script>
 </head>
 <body>
@@ -31,25 +31,26 @@ if (r!=null) return unescape(r[2]); return null; //返回参数值
 			<sitemesh:write property="myBody" />
 		</div>
 		<div class="weui-tabbar">
-			<a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
+			<a href="<%=basePath%>/list" class="weui-tabbar__item ">
 				<span style="display: inline-block; position: relative;"> <img
-					src="./dist/images/car.png" alt="" class="weui-tabbar__icon">
+					src="<%=basePath%>/dist/images/car.png" alt="" class="weui-tabbar__icon">
 			</span>
 				<p class="weui-tabbar__label">有顺车</p>
-			</a> <a href="javascript:;" class="weui-tabbar__item"> <img
-				src="./dist/images/carlift.png" alt="" class="weui-tabbar__icon">
+			</a> <a href="<%=basePath%>/lift_list" class="weui-tabbar__item"> <img
+				src="<%=basePath%>/dist/images/carlift.png" alt="" class="weui-tabbar__icon">
 				<p class="weui-tabbar__label">搭顺车</p>
-			</a> <a href="javascript:;" class="weui-tabbar__item"> <span
+			</a> <a href="<%=basePath%>/publish" class="weui-tabbar__item"> <span
 				style="display: inline-block; position: relative;"> <img
-					src="./dist/images/speaker.png" alt="" class="weui-tabbar__icon">
+					src="<%=basePath%>/dist/images/speaker.png" alt="" class="weui-tabbar__icon">
 			</span>
 				<p class="weui-tabbar__label">发布</p>
-			</a> <a href="javascript:;" class="weui-tabbar__item"> <img
-				src="./dist/images/user.png" alt="" class="weui-tabbar__icon">
+			</a> <a href="<%=basePath%>/personal" class="weui-tabbar__item"> <img
+				src="<%=basePath%>/dist/images/user.png" alt="" class="weui-tabbar__icon">
 				<p class="weui-tabbar__label">我</p>
 			</a>
 		</div>
 	</div>
-	
+
+	<sitemesh:write property="myScript" />
 </body>
 </html>

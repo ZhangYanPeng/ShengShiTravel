@@ -523,19 +523,52 @@ to {
 }
 
 .weui-tabbar__item.weui-bar__item_on .weui-tabbar__label {
-    color: #3498DB;
+	color: #3498DB;
 }
 
 .default-a {
-    color: #3498DB;
+	color: #3498DB;
 }
 
 p.default-shuoming {
-    color: gray;
+	color: gray;
 }
 
 .weui-flex__item {
-    margin-top: 1em;
-    text-align: center;
-    color: #3498DB;
+	margin-top: 1em;
+	text-align: center;
+	color: #3498DB;
+}
+
+span.youshunche {
+	padding: 0.15em;
+	background-color: #3498db;
+	color: white;
+}
+
+span.dashunche {
+	padding: 0.15em;
+	background-color: #09BB07;
+	color: white;
+}
+
+.view-title {
+	font-weight: bold;
+	color: #3498db;
+	font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti,
+		MingLiu;
+}
+
+.view-info-meta {
+	color: #757070;
+}
+
+.weui-media-box__info__meta i {
+	margin-right: 0.5em;
+}
+
+.view-ds-title {
+	font-weight: bold;
+	font-family: "Microsoft YaHei", 微软雅黑, "MicrosoftJhengHei", 华文细黑, STHeiti,
+		MingLiu;
 }
