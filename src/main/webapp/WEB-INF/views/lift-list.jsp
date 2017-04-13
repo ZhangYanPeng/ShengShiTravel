@@ -56,6 +56,7 @@
 				console.log(data);
 			}
 		});
-	</script> </myBody>
+	</script> 
+</myBody>
 </body>
 </html>

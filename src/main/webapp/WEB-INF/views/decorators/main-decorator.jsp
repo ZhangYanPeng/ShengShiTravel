@@ -31,25 +31,31 @@ if (r!=null) return unescape(r[2]); return null; //返回参数值
 			<sitemesh:write property="myBody" />
 		</div>
 		<div class="weui-tabbar">
-			<a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
+			<a href="javascript:;" class="weui-tabbar__item weui-bar__item_on" onclick="tabClick(this)">
 				<span style="display: inline-block; position: relative;"> <img
-					src="./dist/images/car.png" alt="" class="weui-tabbar__icon">
+					src="<%=basePath%>/dist/images/car.png" alt="" class="weui-tabbar__icon">
 			</span>
 				<p class="weui-tabbar__label">有顺车</p>
 			</a> <a href="javascript:;" class="weui-tabbar__item"> <img
-				src="./dist/images/carlift.png" alt="" class="weui-tabbar__icon">
+				src="<%=basePath%>/dist/images/carlift.png" alt="" class="weui-tabbar__icon">
 				<p class="weui-tabbar__label">搭顺车</p>
 			</a> <a href="javascript:;" class="weui-tabbar__item"> <span
 				style="display: inline-block; position: relative;"> <img
-					src="./dist/images/speaker.png" alt="" class="weui-tabbar__icon">
+					src="<%=basePath%>/dist/images/speaker.png" alt="" class="weui-tabbar__icon">
 			</span>
 				<p class="weui-tabbar__label">发布</p>
 			</a> <a href="javascript:;" class="weui-tabbar__item"> <img
-				src="./dist/images/user.png" alt="" class="weui-tabbar__icon">
+				src="<%=basePath%>/dist/images/user.png" alt="" class="weui-tabbar__icon">
 				<p class="weui-tabbar__label">我</p>
 			</a>
 		</div>
 	</div>
+	<script type="text/javascript">
+		$('.weui-tabbar a').click(function(e){
+			$('.weui-tabbar a').removeClass('weui-bar__item_on');
+			
+		});
+	</script>
 	
 </body>
 </html>

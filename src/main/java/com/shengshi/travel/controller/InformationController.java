@@ -61,6 +61,10 @@ public class InformationController {
 	public String lift_list(String openid){
 		return "lift-list";
 	}
+	@RequestMapping(value = "/personal", method = RequestMethod.GET)
+	public String personal(String openid){
+		return "personal";
+	}
 	
 	@RequestMapping(value = "/get_list", method = RequestMethod.POST)
 	public @ResponseBody PageResults<Information> list_information(@RequestBody Map map){

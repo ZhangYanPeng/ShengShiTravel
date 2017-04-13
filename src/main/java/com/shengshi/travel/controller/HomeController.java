@@ -36,4 +36,44 @@ public class HomeController {
 		return "home";
 	}
 	
+	/**
+	 * 有顺车
+	 * @param openid
+	 * @return
+	 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String list(String openid){
+		return "list";
+	}
+	
+	/**
+	 * 搭顺车
+	 * @param openid
+	 * @return
+	 */
+	@RequestMapping(value = "/lift_list", method = RequestMethod.GET)
+	public String lift_list(String openid){
+		return "lift-list";
+	}
+	/**
+	 * 发布
+	 * @param openid
+	 * @return
+	 */
+	@RequestMapping(value = "/publish", method = RequestMethod.GET)
+	public String publish(String openid){
+		return "publish";
+	}
+	
+	/**
+	 *个人信息 
+	 * @param openid
+	 * @return
+	 */
+	@RequestMapping(value = "/personal", method = RequestMethod.GET)
+	public String personal(String openid){
+		return "personal";
+	}
+	
+	
 }
