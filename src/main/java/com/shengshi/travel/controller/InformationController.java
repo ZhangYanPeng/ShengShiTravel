@@ -1,6 +1,7 @@
 package com.shengshi.travel.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class InformationController {
 	InformationService informationService;
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	HttpSession session;
 	
 	@RequestMapping(value = "/publish", method = RequestMethod.GET)
 	public String publish(){
@@ -28,6 +31,7 @@ public class InformationController {
 	
 	@RequestMapping(value = "/personal", method = RequestMethod.GET)
 	public String personal(){
+		session.setAttribute("tab", "wo");
 		return "personal";
 	}
 	
@@ -35,12 +39,14 @@ public class InformationController {
 	public String list_information(){
 //		PageResults<Information> informations = informationService.list(type, pageNo);
 //		request.getSession().setAttribute("informations", informations);
+		session.setAttribute("tab", "youshunche");
 		return "list";
 	}
 	@RequestMapping(value = "/lift_list", method = RequestMethod.GET)
 	public String lift_list_information(){
 //		PageResults<Information> informations = informationService.list(type, pageNo);
 //		request.getSession().setAttribute("informations", informations);
+		session.setAttribute("tab", "dashunche");
 		return "lift-list";
 	}
 	
@@ -52,10 +58,15 @@ public class InformationController {
 	}
 	
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public String view_information(HttpServletRequest request){
+	public String view_information(HttpServletRequest request,String category){
 //		Information information = informationService.get(id);
 //		request.setAttribute("information", information);
-		return "view";
+		if(category.equals("youshunche")){
+			return "view";
+		}else{
+			return "lift-view";
+		}
+		
 	}
 	
 	@RequestMapping(value = "/focus", method = RequestMethod.POST)

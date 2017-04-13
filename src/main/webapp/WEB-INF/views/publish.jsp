@@ -12,27 +12,30 @@
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,user-scalable=0">
 <link rel="stylesheet" href="<%=basePath%>/dist/weui/weui.css">
+<script type="text/javascript"
+	src="<%=basePath%>/dist/lib/jquery/jquery.js"></script>
 </head>
 <body>
 	<myBody>
 	<div class="weui-cells__title">类型</div>
 	<div class="weui-cells weui-cells_radio">
-		<label class="weui-cell weui-check__label" for="x11">
+		<label class="weui-cell weui-check__label" for="cYoushunche">
 			<div class="weui-cell__bd">
 				<p>有顺车</p>
 			</div>
 			<div class="weui-cell__ft">
-				<input checked="checked" type="radio" class="weui-check"
-					name="radio1" id="x11"> <span class="weui-icon-checked"></span>
+				<input checked="checked" type="radio" class="weui-check category"
+					name="radio1" id="cYoushunche"> <span
+					class="weui-icon-checked"></span>
 			</div>
-		</label> <label class="weui-cell weui-check__label" for="x12">
+		</label> <label class="weui-cell weui-check__label" for="cDashunche">
 
 			<div class="weui-cell__bd">
 				<p>搭顺车</p>
 			</div>
 			<div class="weui-cell__ft">
-				<input type="radio" name="radio1" class="weui-check" id="x12">
-				<span class="weui-icon-checked"></span>
+				<input type="radio" name="radio1" class="weui-check category"
+					id="cDashunche"> <span class="weui-icon-checked"></span>
 			</div>
 	</div>
 	<div class="weui-cells weui-cells_form">
@@ -63,7 +66,8 @@
 					placeholder="">
 			</div>
 		</div>
-		<div class="weui-cell weui-cell_select weui-cell_select-after">
+		<div class="weui-cell weui-cell_select weui-cell_select-after "
+			id="form-chexing">
 			<div class="weui-cell__hd">
 				<label class="weui-label">车型</label>
 			</div>
@@ -76,7 +80,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="weui-cell">
+		<div class="weui-cell" id="form-kongzuoshu">
 			<div class="weui-cell__hd">
 				<label class="weui-label">空座数</label>
 			</div>
@@ -111,11 +115,25 @@
 					placeholder="请输入联系人手机号">
 			</div>
 		</div>
-		<div class="weui-btn-area">
+		<div class="weui-btn-area" style="margin-bottom: 2em;">
 			<a class="weui-btn weui-btn_primary" href="javascript:"
 				id="showTooltips">确认发布</a>
 		</div>
+		<script type="text/javascript">
+			$('.category').change(function(e) {
+				var target = $(e.target);
+				//console.log(target);
+				if (target.attr('id') == 'cYoushunche') {
+					$('#form-chexing').show();
+					$('#form-kongzuoshu').show();
+				} else {
+					$('#form-chexing').hide();
+					$('#form-kongzuoshu').hide();
+				}
+			});
+		</script>
 	</div>
+
 	</myBody>
 </body>
 </html>
