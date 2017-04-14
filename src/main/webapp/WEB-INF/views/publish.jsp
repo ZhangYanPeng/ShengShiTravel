@@ -14,31 +14,31 @@
 <link rel="stylesheet" href="<%=basePath%>/dist/weui/weui.css">
 <script type="text/javascript"
 	src="<%=basePath%>/dist/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="<%=basePath%>/dist/lib/json_serialize/json.js"></script>
+	
 </head>
 <body>
 	<form action="<%=basePath%>/information/publish" method="post" id="publish-form" data-url="<%=basePath%>">
 		<div class="weui-cells weui-cells_form">
 			<div class="weui-cells__title">类型</div>
-			<input type="hidden" name="type" id="type" />
 			<div class="weui-cells weui-cells_radio">
 				<label class="weui-cell weui-check__label" for="cYoushunche">
 					<div class="weui-cell__bd">
 						<p>有顺车</p>
 					</div>
 					<div class="weui-cell__ft">
-						<input checked="checked" type="radio" class="weui-check category"
-							name="radio1" id="cYoushunche"> <span
+						<input checked="checked" type="radio" class="weui-check category" name="type" id="type" value="0"> <span
 							class="weui-icon-checked"></span>
 					</div>
-				</label> <label class="weui-cell weui-check__label" for="cDashunche">
-
+				</label>
+				<label class="weui-cell weui-check__label" for="cDashunche">
 					<div class="weui-cell__bd">
 						<p>搭顺车</p>
 					</div>
 					<div class="weui-cell__ft">
-						<input type="radio" name="radio1" class="weui-check category"
-							id="cDashunche"> <span class="weui-icon-checked"></span>
+						<input type="radio" class="weui-check category" name="type" id="type" value="1"> <span class="weui-icon-checked"></span>
 					</div>
+				</label>
 			</div>
 			<div class="weui-cell">
 				<div class="weui-cell__hd">
@@ -164,7 +164,11 @@
 			$.ajax({
 				url:$('#publish-form').attr('action'),
 				type:'POST',
-				data:$('#publish-form').serialize(),
+				contentType: "application/json",
+				data:JSON.stringify($('#publish-form').serializeObject()),
+				error:function(data){
+					console.log(data);
+				},
 				success:function(result){
 					//有顺车
 					if($('#type').val() == 0){
@@ -172,8 +176,6 @@
 					}else{
 						location.href = $('#publish-form').attr('data-url')+'/lift_list'
 					}
-				
-					
 					if(result == 1){
 						
 					}else{
