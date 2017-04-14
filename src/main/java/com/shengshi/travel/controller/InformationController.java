@@ -36,13 +36,12 @@ public class InformationController {
 		Information information = new Information();
 		information.setCapacity(Integer.valueOf((String) map.get("capacity")));
 		information.setType(Integer.valueOf((String) map.get("type")));
+		information.setCar_type(Integer.valueOf((String)map.get("chexing")));
 		information.setPublish_time(System.currentTimeMillis());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		try {
 			String timestr = (String) map.get("start_time");
-			System.out.println((String) map.get("start_time")+"****");
 			timestr = timestr.replace('T', ' ');
-			System.out.println(timestr);
 			Date start_time = sdf.parse(timestr);
 			information.setStart_time(start_time.getTime());
 		} catch (ParseException e) {
@@ -68,9 +67,10 @@ public class InformationController {
 	
 	@RequestMapping(value = "/get_list", method = RequestMethod.POST)
 	public @ResponseBody PageResults<Information> list_information(@RequestBody Map map){
-		int type = Integer.valueOf((String) map.get("type"));
-		int order = Integer.valueOf((String) map.get("order"));
-		int pageNo = Integer.valueOf((String) map.get("pageNo"));
+		System.out.println(map);
+		int type = (Integer)map.get("type");
+		int order = Integer.valueOf((Integer)map.get("order"));
+		int pageNo = Integer.valueOf((Integer) map.get("pageNo"));
 		return informationService.list(type, order, pageNo);
 	}
 	

@@ -56,14 +56,29 @@
 									id="showTooltips">确认</a>
 							</div>
 						</div>
-
-
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="weui-cells">
+	<div class="weui-cells list" data-url="<%=basePath%>">
+		<a class="weui-cell weui-cell_access"
+			href="./view?category=youshunche">
+			<div class="weui-cell__hd">
+				<img src="<%=basePath%>/dist/images/0.jpg" alt=""
+					style="width: 60px; margin-right: 5px; display: block">
+			</div>
+			<div class="weui-cell__bd">
+				<p>榆林→府谷</p>
+				<p style="font-size: 13px; color: #888888">出发日期:03月22日17:00</p>
+				<p style="font-size: 13px; color: #888888">
+					<span class="youshunche">有顺车</span> 李先生(车主)
+				</p>
+			</div>
+			<div class="weui-cell__ft">
+				<p style="font-size: 13px; color: #888888">53分钟前发布</p>
+			</div>
+		</a>
 		<a class="weui-cell weui-cell_access"
 			href="./view?category=youshunche">
 			<div class="weui-cell__hd">
@@ -97,6 +112,7 @@
 		<script type="text/javascript">
 		 $('.weui-tabbar a:eq(0)').addClass('weui-bar__item_on'); 
 		</script>
+		<script type="text/javascript" src="<%=basePath%>/dist/js/list.js"></script>
 	</myScript>
 </body>
 </html>
