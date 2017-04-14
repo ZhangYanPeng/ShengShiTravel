@@ -14,11 +14,16 @@
 <link rel="stylesheet" href="<%=basePath%>/dist/weui/weui.css">
 <script type="text/javascript"
 	src="<%=basePath%>/dist/lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="<%=basePath%>/dist/lib/json_serialize/json.js"></script>
-	
+<script type="text/javascript"
+	src="<%=basePath%>/dist/lib/json_serialize/json.js"></script>
+
+<script type="text/javascript" src="<%=basePath%>/dist/weui/weui.min.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>/dist/weui/weui.min.css"></script>
 </head>
 <body>
-	<form action="<%=basePath%>/information/publish" method="post" id="publish-form" data-url="<%=basePath%>">
+	<form action="<%=basePath%>/information/publish" method="post"
+		id="publish-form" data-url="<%=basePath%>">
 		<div class="weui-cells weui-cells_form">
 			<div class="weui-cells__title">类型</div>
 			<div class="weui-cells weui-cells_radio">
@@ -27,16 +32,17 @@
 						<p>有顺车</p>
 					</div>
 					<div class="weui-cell__ft">
-						<input checked="checked" type="radio" name="radio1" class="weui-check category"  id="cYoushunche" > <span
+						<input checked="checked" type="radio" name="radio1"
+							class="weui-check category" id="cYoushunche"> <span
 							class="weui-icon-checked"></span>
 					</div>
-				</label>
-				<label class="weui-cell weui-check__label" for="cDashunche">
+				</label> <label class="weui-cell weui-check__label" for="cDashunche">
 					<div class="weui-cell__bd">
 						<p>搭顺车</p>
 					</div>
 					<div class="weui-cell__ft">
-						<input type="radio" name="radio1" class="weui-check category"  id="cDashunche"> <span class="weui-icon-checked"></span>
+						<input type="radio" name="radio1" class="weui-check category"
+							id="cDashunche"> <span class="weui-icon-checked"></span>
 					</div>
 				</label>
 			</div>
@@ -46,7 +52,7 @@
 				</div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="text" pattern="" name="startpos"
-						placeholder="请输入出发地(两个以上汉字)">
+						id="startpos" placeholder="请输入出发地(两个以上汉字)">
 				</div>
 			</div>
 			<div class="weui-cell">
@@ -55,7 +61,7 @@
 				</div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="text" pattern="" name="destination"
-						placeholder="请输入目的地(两个以上汉字)">
+						id="destination" placeholder="请输入目的地(两个以上汉字)">
 				</div>
 			</div>
 			<div class="weui-cell">
@@ -64,7 +70,7 @@
 				</div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="datetime-local" value=""
-						placeholder="" name="start_time">
+						placeholder="" name="start_time" id="start_time">
 				</div>
 			</div>
 			<div class="weui-cell weui-cell_select weui-cell_select-after "
@@ -73,7 +79,7 @@
 					<label class="weui-label">车型</label>
 				</div>
 				<div class="weui-cell__bd ">
-					<select class="weui-select" name="chexing">
+					<select class="weui-select" name="chexing" id="car_type">
 						<option selected="" value="1">轿车</option>
 						<option value="2">越野车SUV</option>
 						<option value="3">面包车</option>
@@ -87,7 +93,7 @@
 				</div>
 				<div class="weui-cell__bd">
 					<input name="capacity" class="weui-input" type="number"
-						pattern="[0-9]*" placeholder="请输入座位数">
+						pattern="[0-9]*" placeholder="请输入座位数" id="capacity">
 				</div>
 			</div>
 			<div class="weui-cell weui-cell_select weui-cell_select-after "
@@ -96,7 +102,7 @@
 					<label class="weui-label">道路</label>
 				</div>
 				<div class="weui-cell__bd ">
-					<select class="weui-select" name="">
+					<select class="weui-select" name="road_type" id="road_type">
 						<option selected="" value="1">高速</option>
 						<option value="2">低速</option>
 					</select>
@@ -108,7 +114,7 @@
 				</div>
 				<div class="weui-cell__bd">
 					<input name="road_toll" class="weui-input" type="text"
-						placeholder="请输入过路费">
+						id="road_toll" placeholder="请输入过路费">
 				</div>
 			</div>
 			<div class="weui-cell">
@@ -117,7 +123,7 @@
 				</div>
 				<div class="weui-cell__bd">
 					<textarea class="weui-textarea" placeholder="" rows="3"
-						name="remarks"></textarea>
+						id="remarks" name="remarks"></textarea>
 				</div>
 			</div>
 			<div class="weui-cell">
@@ -126,7 +132,7 @@
 				</div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="text" pattern="" name="contact"
-						placeholder="请输入联系人姓名">
+						id="contact" placeholder="请输入联系人姓名">
 				</div>
 			</div>
 			<div class="weui-cell">
@@ -135,6 +141,7 @@
 				</div>
 				<div class="weui-cell__bd">
 					<input class="weui-input" type="tel" pattern="" name="contact_info"
+						id== "contact_info"
 						placeholder="请输入联系人手机号">
 				</div>
 			</div>
@@ -144,6 +151,9 @@
 	<div class="weui-btn-area" style="margin-bottom: 2em;">
 		<a class="weui-btn weui-btn_primary" href="javascript:" id="submit">确认发布</a>
 	</div>
+
+
+
 	<script type="text/javascript">
 		$('.category').change(function(e) {
 			var target = $(e.target);
@@ -161,6 +171,43 @@
 	</script>
 	<script type="text/javascript">
 		$('#submit').click(function() {
+			var info="";
+			var check = 0;
+			if ( $('#startpos').val() =="" ){
+				info += "请输入出发地<br>";
+				check = 1;
+			}
+			if ( $('#destination').val() =="" ){
+				info += "请输入目的地<br>";
+				check = 1;
+			}
+			if ( $('#start_time').val() =="" ){
+				info += "请选择出发时间<br>";
+				check = 1;
+			}
+			if ( $('#capacity').val()==0 ){
+				info += "请输入空座数<br>";
+				check = 1;
+			}
+			if ( $('#contact').val() == "" ){
+				info += "请输入联系人姓名<br>";
+				check = 1;
+			}
+			if ( $('#contact_info').val() == "" ){
+				info += "请输入联系人手机号<br>";
+				check = 1;
+			}
+			else{
+				var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+				if(!myreg.test($('#contact_info').val())) 
+				{ 
+				    info += "请输入正确的手机号<br>";
+				    check = 1;
+				}
+			}
+			if (check == 1)
+				weui.alert(info);
+			else{
 			$.ajax({
 				url:$('#publish-form').attr('action'),
 				type:'POST',
@@ -184,6 +231,7 @@
 				}
 			});
 		});
+		}
 	</script>
 
 </body>

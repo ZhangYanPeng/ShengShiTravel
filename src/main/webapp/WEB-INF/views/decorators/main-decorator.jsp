@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="<%=basePath%>/dist/css/style.css">
 <script type="text/javascript" src="<%=basePath%>/dist/lib/jquery/jquery.js"></script>
 <script type="text/javascript" src="<%=basePath%>/dist/lib/json_serialize/json.js"></script>
+<script type="text/javascript" src="<%=basePath%>/dist/weui/weui.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>/dist/weui/weui.min.css"></script>
 <script type="text/javascript">
 	function getUrlParam(name)
 	{

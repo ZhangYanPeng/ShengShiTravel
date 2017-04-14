@@ -36,9 +36,9 @@ public class InformationController {
 		Information information = new Information();
 		if( Integer.valueOf((String) map.get("type")) == 0 ){
 			information.setCapacity(Integer.valueOf((String) map.get("capacity")));
+			information.setCar_type(Integer.valueOf((String)map.get("chexing")));
 		}
 		information.setType(Integer.valueOf((String) map.get("type")));
-		information.setCar_type(Integer.valueOf((String)map.get("chexing")));
 		information.setPublish_time(System.currentTimeMillis());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		try {
@@ -69,7 +69,6 @@ public class InformationController {
 	
 	@RequestMapping(value = "/get_list", method = RequestMethod.POST)
 	public @ResponseBody PageResults<Information> list_information(@RequestBody Map map){
-		System.out.println(map);
 		int type = (Integer)map.get("type");
 		int order = Integer.valueOf((Integer)map.get("order"));
 		int pageNo = Integer.valueOf((Integer) map.get("pageNo"));
@@ -77,23 +76,24 @@ public class InformationController {
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public String search_information(HttpServletRequest request, int type, int pageNo, Information information){
-		PageResults<Information> informations = informationService.search(information, type, pageNo);
-		request.getSession().setAttribute("informations", informations);
-		return "";
+	public @ResponseBody PageResults<Information> search_information(@RequestBody Map map){
+		int type = Integer.valueOf((String)map.get("type"));
+		Information information = new Information();
+		information.setStartpos((String)map.get("start_pos"));
+		information.setDestination((String)map.get("destination"));
+		int order = Integer.valueOf((Integer)map.get("order"));
+		int pageNo = Integer.valueOf((Integer) map.get("pageNo"));
+		return informationService.search(information, type, pageNo);
 	}
 	
-	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public String view_information(HttpServletRequest request){
-//		Information information = informationService.get(id);
-//		request.setAttribute("information", information);
-		return "view";
+	@RequestMapping(value = "/get_information", method = RequestMethod.POST)
+	public @ResponseBody Information get_information(@RequestBody String information_id){
+		return informationService.get(Long.valueOf(information_id));
 	}
 	
 	@RequestMapping(value = "/focus", method = RequestMethod.POST)
-	public String focus(Customer customer, int type, long information_id){
+	public @ResponseBody int focus(Customer customer, int type, long information_id){
 		Information information = informationService.get(information_id);
-		customerService.focus(customer, information, type);
-		return "";
+		return customerService.focus(customer, information, type);
 	}
 }

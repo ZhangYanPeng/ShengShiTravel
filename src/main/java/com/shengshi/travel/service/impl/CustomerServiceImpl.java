@@ -44,14 +44,20 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional
 	public int focus(Customer customer, Information information, int type) {
 		// TODO Auto-generated method stub
-		String focus = customer.getFocus();
+		String focus = "";
 		if(type == Constants.add_focus){
-			focus += "@" + information.getId();
-			customer.setFocus(focus);
+			String[] strs = focus.split("@");
+			int check =0;
+			for( String str: strs){
+				if( str.equals(""+information.getId())){
+					check++;
+				}
+			}
+			if( check==0 )
+				focus += "@" + information.getId();
 		}
 		else{
 			String[] strs = focus.split("@");
-			focus = "";
 			for( String str: strs){
 				if( !str.equals(""+information.getId())){
 					focus += "@" + information.getId();
@@ -60,7 +66,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		customer.setFocus(focus);
 		customerDAO.update(customer);
-		return 0;
+		return 1;
 	}
 
 	@Override
