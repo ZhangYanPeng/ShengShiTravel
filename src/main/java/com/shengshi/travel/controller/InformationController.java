@@ -1,5 +1,7 @@
 package com.shengshi.travel.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -30,11 +32,24 @@ public class InformationController {
 	
 	@RequestMapping(value = "/publish", method = RequestMethod.POST)
 	public @ResponseBody int publish(@RequestBody Map map){
+		System.out.println(map);
 		Information information = new Information();
 		information.setCapacity(Integer.valueOf((String) map.get("capacity")));
 		information.setType(Integer.valueOf((String) map.get("type")));
 		information.setPublish_time(System.currentTimeMillis());
-		information.setStart_time(Long.valueOf((String) map.get("start_time")));
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		try {
+			String timestr = (String) map.get("start_time");
+			System.out.println((String) map.get("start_time")+"****");
+			timestr = timestr.replace('T', ' ');
+			System.out.println(timestr);
+			Date start_time = sdf.parse(timestr);
+			information.setStart_time(start_time.getTime());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
 		information.setStartpos((String) map.get("startpos"));
 		information.setDestination((String) map.get("destination"));
 		//TODO

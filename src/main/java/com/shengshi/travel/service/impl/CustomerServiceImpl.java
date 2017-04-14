@@ -106,7 +106,7 @@ public class CustomerServiceImpl implements CustomerService {
 		information.setCustomer(customer);
 		customerDAO.update(customer);
 		imformationDAO.save(information);
-		return 0;
+		return 1;
 	}
 
 }
