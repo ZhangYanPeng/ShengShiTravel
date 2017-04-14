@@ -38,6 +38,7 @@ public class InformationController {
 			information.setCapacity(Integer.valueOf((String) map.get("capacity")));
 		}
 		information.setType(Integer.valueOf((String) map.get("type")));
+		information.setCar_type(Integer.valueOf((String)map.get("chexing")));
 		information.setPublish_time(System.currentTimeMillis());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		try {
@@ -68,9 +69,10 @@ public class InformationController {
 	
 	@RequestMapping(value = "/get_list", method = RequestMethod.POST)
 	public @ResponseBody PageResults<Information> list_information(@RequestBody Map map){
-		int type = Integer.valueOf((String) map.get("type"));
-		int order = Integer.valueOf((String) map.get("order"));
-		int pageNo = Integer.valueOf((String) map.get("pageNo"));
+		System.out.println(map);
+		int type = (Integer)map.get("type");
+		int order = Integer.valueOf((Integer)map.get("order"));
+		int pageNo = Integer.valueOf((Integer) map.get("pageNo"));
 		return informationService.list(type, order, pageNo);
 	}
 	

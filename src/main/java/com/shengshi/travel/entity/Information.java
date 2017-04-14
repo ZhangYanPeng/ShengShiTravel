@@ -29,7 +29,7 @@ public class Information {
 	private String destination;
 	
 	private int capacity;
-	private int set_num;
+	private int car_type;
 	private double distance;
 	private double time;//消耗时间
 	private double road_toll; //过路费
@@ -91,12 +91,13 @@ public class Information {
 		this.capacity = capacity;
 	}
 
-	public int getSet_num() {
-		return set_num;
+	
+	public int getCar_type() {
+		return car_type;
 	}
 
-	public void setSet_num(int set_num) {
-		this.set_num = set_num;
+	public void setCar_type(int car_type) {
+		this.car_type = car_type;
 	}
 
 	public double getDistance() {
