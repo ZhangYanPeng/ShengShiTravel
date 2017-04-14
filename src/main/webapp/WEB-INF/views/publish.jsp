@@ -14,9 +14,14 @@
 <link rel="stylesheet" href="<%=basePath%>/dist/weui/weui.css">
 <script type="text/javascript"
 	src="<%=basePath%>/dist/lib/jquery/jquery.js"></script>
+<link rel="stylesheet"
+	href="<%=basePath%>/dist/lib/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+<script type="text/javascript"
+	src="<%=basePath%>/dist/lib/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 </head>
 <body>
-	<form action="<%=basePath%>/information/publish" method="post" id="publish-form" data-url="<%=basePath%>">
+	<form action="<%=basePath%>/information/publish" method="post"
+		id="publish-form" data-url="<%=basePath%>">
 		<div class="weui-cells weui-cells_form">
 			<div class="weui-cells__title">类型</div>
 			<input type="hidden" name="type" id="type" />
@@ -39,6 +44,7 @@
 						<input type="radio" name="radio1" class="weui-check category"
 							id="cDashunche"> <span class="weui-icon-checked"></span>
 					</div>
+				</label>
 			</div>
 			<div class="weui-cell">
 				<div class="weui-cell__hd">
@@ -160,28 +166,36 @@
 		});
 	</script>
 	<script type="text/javascript">
-		$('#submit').click(function() {
-			$.ajax({
-				url:$('#publish-form').attr('action'),
-				type:'POST',
-				data:$('#publish-form').serialize(),
-				success:function(result){
-					//有顺车
-					if($('#type').val() == 0){
-						location.href = $('#publish-form').attr('data-url')+'/list'
-					}else{
-						location.href = $('#publish-form').attr('data-url')+'/lift_list'
-					}
-				
-					
-					if(result == 1){
-						
-					}else{
-						
-					}
-				}
-			});
-		});
+		console.log($('#publish-form').serializeObject());
+		$('#submit').click(
+				function() {
+					$.ajax({
+						url : $('#publish-form').attr('action'),
+						type : 'POST',
+						dataType : "json",
+						contentType : "application/json; charset=utf-8",
+						data : JSON.stringify($('#publish-form')
+								.serializeArray()),
+						success : function(result) {
+							//有顺车
+							if ($('#type').val() == 0) {
+								location.href = $('#publish-form').attr(
+										'data-url')
+										+ '/list'
+							} else {
+								location.href = $('#publish-form').attr(
+										'data-url')
+										+ '/lift_list'
+							}
+
+							if (result == 1) {
+
+							} else {
+
+							}
+						}
+					});
+				});
 	</script>
 
 </body>
