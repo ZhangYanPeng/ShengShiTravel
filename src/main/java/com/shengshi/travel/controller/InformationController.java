@@ -34,15 +34,15 @@ public class InformationController {
 	public @ResponseBody int publish(@RequestBody Map map){
 		System.out.println(map);
 		Information information = new Information();
-		information.setCapacity(Integer.valueOf((String) map.get("capacity")));
+		if( Integer.valueOf((String) map.get("type")) == 0 ){
+			information.setCapacity(Integer.valueOf((String) map.get("capacity")));
+		}
 		information.setType(Integer.valueOf((String) map.get("type")));
 		information.setPublish_time(System.currentTimeMillis());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		try {
 			String timestr = (String) map.get("start_time");
-			System.out.println((String) map.get("start_time")+"****");
 			timestr = timestr.replace('T', ' ');
-			System.out.println(timestr);
 			Date start_time = sdf.parse(timestr);
 			information.setStart_time(start_time.getTime());
 		} catch (ParseException e) {

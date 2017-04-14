@@ -27,7 +27,7 @@
 						<p>有顺车</p>
 					</div>
 					<div class="weui-cell__ft">
-						<input checked="checked" type="radio" class="weui-check category" name="type" id="type" value="0"> <span
+						<input checked="checked" type="radio" name="radio1" class="weui-check category"  id="cYoushunche" > <span
 							class="weui-icon-checked"></span>
 					</div>
 				</label>
@@ -36,7 +36,7 @@
 						<p>搭顺车</p>
 					</div>
 					<div class="weui-cell__ft">
-						<input type="radio" class="weui-check category" name="type" id="type" value="1"> <span class="weui-icon-checked"></span>
+						<input type="radio" name="radio1" class="weui-check category"  id="cDashunche"> <span class="weui-icon-checked"></span>
 					</div>
 				</label>
 			</div>
