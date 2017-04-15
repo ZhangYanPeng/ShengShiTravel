@@ -15,12 +15,13 @@
 </head>
 <body>
 	<myBody>
+	<div class="info-type" data-type="0"></div>
 	<div class="weui-flex">
 		<div class="weui-flex__item">
-			<a>发布时间</a> <i class="fa fa-sort-up"></i>
+			<a id="publish-time">发布时间</a> <i class="fa fa-sort-up"></i>
 		</div>
 		<div class="weui-flex__item">
-			<a>出发时间</a> <i class="fa fa-sort-up"></i>
+			<a id="start-time">出发时间</a> <i class="fa fa-sort-up"></i>
 		</div>
 		<div class="weui-flex__item">
 			<a href="javascript:;" id="choosePos" style="color: #3498db;">地点选择</a>
@@ -61,41 +62,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="weui-cells list" data-url="<%=basePath%>">
-		<a class="weui-cell weui-cell_access"
-			href="./view?category=youshunche">
-			<div class="weui-cell__hd">
-				<img src="<%=basePath%>/dist/images/0.jpg" alt=""
-					style="width: 60px; margin-right: 5px; display: block">
-			</div>
-			<div class="weui-cell__bd">
-				<p>榆林→府谷</p>
-				<p style="font-size: 13px; color: #888888">出发日期:03月22日17:00</p>
-				<p style="font-size: 13px; color: #888888">
-					<span class="youshunche">有顺车</span> 李先生(车主)
-				</p>
-			</div>
-			<div class="weui-cell__ft">
-				<p style="font-size: 13px; color: #888888">53分钟前发布</p>
-			</div>
-		</a>
-		<a class="weui-cell weui-cell_access"
-			href="./view?category=youshunche">
-			<div class="weui-cell__hd">
-				<img src="<%=basePath%>/dist/images/0.jpg" alt=""
-					style="width: 60px; margin-right: 5px; display: block">
-			</div>
-			<div class="weui-cell__bd">
-				<p>榆林→府谷</p>
-				<p style="font-size: 13px; color: #888888">出发日期:03月22日17:00</p>
-				<p style="font-size: 13px; color: #888888">
-					<span class="youshunche">有顺车</span> 李先生(车主)
-				</p>
-			</div>
-			<div class="weui-cell__ft">
-				<p style="font-size: 13px; color: #888888">53分钟前发布</p>
-			</div>
-		</a>
+	<div class="weui-cells list" id="info-list" data-url="<%=basePath%>">
+		
 	</div>
 	<script type="text/javascript">
 		$('body').click(function(e) {
@@ -106,13 +74,10 @@
 				$('#choosePos-actionsheet').hide();
 			}
 		});
-	</script> 
-	</myBody>
-	<myScript>
-		<script type="text/javascript">
-		 $('.weui-tabbar a:eq(0)').addClass('weui-bar__item_on'); 
-		</script>
-		<script type="text/javascript" src="<%=basePath%>/dist/js/list.js"></script>
+	</script> </myBody>
+	<myScript> <script type="text/javascript">
+		$('.weui-tabbar a:eq(0)').addClass('weui-bar__item_on');
+	</script> <script type="text/javascript" src="<%=basePath%>/dist/js/list.js"></script>
 	</myScript>
 </body>
 </html>
