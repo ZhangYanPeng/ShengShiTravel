@@ -208,29 +208,29 @@
 			if (check == 1)
 				weui.alert(info);
 			else{
-			$.ajax({
-				url:$('#publish-form').attr('action'),
-				type:'POST',
-				contentType: "application/json",
-				data:JSON.stringify($('#publish-form').serializeObject()),
-				error:function(data){
-					console.log(data);
-				},
-				success:function(result){
-					//有顺车
-					if($('#type').val() == 0){
-						location.href = $('#publish-form').attr('data-url')+'/list'
-					}else{
-						location.href = $('#publish-form').attr('data-url')+'/lift_list'
+				$.ajax({
+					url:$('#publish-form').attr('action'),
+					type:'POST',
+					contentType: "application/json",
+					data:JSON.stringify($('#publish-form').serializeObject()),
+					error:function(data){
+						console.log(data);
+					},
+					success:function(result){
+						//有顺车
+						if($('#type').val() == 0){
+							location.href = $('#publish-form').attr('data-url')+'/list'
+						}else{
+							location.href = $('#publish-form').attr('data-url')+'/lift_list'
+						}
+						if(result == 1){
+							
+						}else{
+							
+						}
 					}
-					if(result == 1){
-						
-					}else{
-						
-					}
-				}
+				});
 			});
-		});
 		}
 	</script>
 

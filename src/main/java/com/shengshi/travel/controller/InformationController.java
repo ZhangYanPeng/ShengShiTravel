@@ -69,12 +69,8 @@ public class InformationController {
 	
 	@RequestMapping(value = "/get_list", method = RequestMethod.POST)
 	public @ResponseBody PageResults<Information> list_information(@RequestBody Map map){
-<<<<<<< HEAD
-		int type = (Integer)map.get("type");
-=======
 		System.out.println(map);
 		int type = Integer.valueOf((String)map.get("type"));
->>>>>>> refs/remotes/origin/Ming
 		int order = Integer.valueOf((Integer)map.get("order"));
 		int pageNo = Integer.valueOf((Integer) map.get("pageNo"));
 		return informationService.list(type, order, pageNo);

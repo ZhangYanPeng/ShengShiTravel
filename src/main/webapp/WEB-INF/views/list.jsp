@@ -74,6 +74,7 @@
 				$('#choosePos-actionsheet').hide();
 			}
 		});
+		
 	</script> </myBody>
 	<myScript> <script type="text/javascript">
 		$('.weui-tabbar a:eq(0)').addClass('weui-bar__item_on');

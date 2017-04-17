@@ -17,12 +17,8 @@
 <link rel="stylesheet"
 	href="<%=basePath%>/dist/lib/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" href="<%=basePath%>/dist/css/style.css">
-<<<<<<< HEAD
-<script type="text/javascript" src="<%=basePath%>/dist/lib/jquery/jquery.js"></script>
-<script type="text/javascript" src="<%=basePath%>/dist/lib/json_serialize/json.js"></script>
 <script type="text/javascript" src="<%=basePath%>/dist/weui/weui.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/dist/weui/weui.min.css"></script>
-=======
 <script type="text/javascript"
 	src="<%=basePath%>/dist/lib/jquery/jquery.js"></script>
 <script type="text/javascript"
@@ -35,7 +31,6 @@
 	src="<%=basePath%>/dist/lib/drop/js/iscroll.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>/dist/lib/drop/js/pullToRefresh.js"></script>
->>>>>>> refs/remotes/origin/Ming
 <script type="text/javascript">
 	function getUrlParam(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
