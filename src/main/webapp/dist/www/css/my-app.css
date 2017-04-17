@@ -1,0 +1,27 @@
+
+.tabbar a.active {
+    color: #3498db;
+}
+i.tab-icon-1{
+    width: 1.5em;
+    height: 1.5em;
+    background-image: url("../img/car.png");
+}
+
+i.tab-icon-2{
+    width: 1.5em;
+    height: 1.5em;
+    background-image: url("../img/carlift.png");
+}
+
+i.tab-icon-3{
+    width: 1.5em;
+    height: 1.5em;
+    background-image: url("../img/speaker.png");
+}
+
+i.tab-icon-4{
+    width: 1.5em;
+    height: 1.5em;
+    background-image: url("../img/user.png");
+}
