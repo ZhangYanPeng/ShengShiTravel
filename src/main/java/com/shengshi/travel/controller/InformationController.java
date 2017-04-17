@@ -71,8 +71,8 @@ public class InformationController {
 	public @ResponseBody PageResults<Information> list_information(@RequestBody Map map){
 		System.out.println(map);
 		int type = Integer.valueOf((String)map.get("type"));
-		int order = Integer.valueOf((Integer)map.get("order"));
-		int pageNo = Integer.valueOf((Integer) map.get("pageNo"));
+		int order = Integer.valueOf((String)map.get("order"));
+		int pageNo = Integer.valueOf((String) map.get("page"));
 		return informationService.list(type, order, pageNo);
 	}
 	

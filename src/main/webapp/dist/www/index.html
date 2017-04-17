@@ -10,7 +10,7 @@
             * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; style-src * 'self' 'unsafe-inline'; media-src *">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -50,7 +50,13 @@
           <!-- Page, data-page contains page name-->
           <div data-page="index" class="page">
             <!-- Scrollable page content-->
-            <div class="page-content">
+            <div class="page-content pull-to-refresh-content  infinite-scroll">
+              <!-- Default pull to refresh layer-->
+              <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+              </div>
+
               <div class="tabs">
                 <div id="list-tab" class="tab active">
                 </div>
@@ -94,11 +100,12 @@
       <div class="content-block-title">发布信息</div>
       <div class="list-block">
         <ul>
+          <input type="hidden" name="type" id="type" value="0"/>
           <!-- Single radio input -->
           <li>
             <label class="label-radio item-content">
               <!-- Checked by default -->
-              <input type="radio" name="my-radio" value="Books" checked="checked">
+              <input type="radio" name="category" value="0" id="cYoushunche" checked="checked" class="category ">
               <div class="item-inner">
                 <div class="item-title">有顺车</div>
               </div>
@@ -107,7 +114,7 @@
           <!-- Another radio input -->
           <li>
             <label class="label-radio item-content">
-              <input type="radio" name="my-radio" value="Movies">
+              <input type="radio" name="category" id="cDashunche" value="1" class="category ">
               <div class="item-inner">
                 <div class="item-title">搭顺车</div>
               </div>
@@ -117,47 +124,21 @@
           <li>
             <div class="item-content">
               <div class="item-inner">
-                <div class="item-title label">Name</div>
+                <div class="item-title label">起点</div>
                 <div class="item-input">
-                  <input type="text" placeholder="Your name">
+                  <input type="text" placeholder="请输入出发地" name="startpos"
+                         id="startpos">
                 </div>
               </div>
             </div>
           </li>
           <li>
             <div class="item-content">
-              <div class="item-media"><i class="icon icon-form-email"></i></div>
               <div class="item-inner">
-                <div class="item-title label">E-mail</div>
+                <div class="item-title label">终点</div>
                 <div class="item-input">
-                  <input type="email" placeholder="E-mail">
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- Select -->
-          <li>
-            <div class="item-content">
-              <div class="item-media"><i class="icon icon-form-gender"></i></div>
-              <div class="item-inner">
-                <div class="item-title label">Gender</div>
-                <div class="item-input">
-                  <select>
-                    <option>Male</option>
-                    <option>Female</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- Date -->
-          <li>
-            <div class="item-content">
-              <div class="item-media"><i class="icon icon-form-calendar"></i></div>
-              <div class="item-inner">
-                <div class="item-title label">Birth date</div>
-                <div class="item-input">
-                  <input type="date" placeholder="Birth day" value="2014-04-30">
+                  <input type="text" placeholder="请输入目的地" name="destination"
+                         id="destination">
                 </div>
               </div>
             </div>
@@ -165,11 +146,37 @@
           <!-- Date time-->
           <li>
             <div class="item-content">
-              <div class="item-media"><i class="icon icon-form-calendar"></i></div>
               <div class="item-inner">
-                <div class="item-title label">Date time</div>
+                <div class="item-title label">出发时间</div>
                 <div class="item-input">
-                  <input type="datetime-local">
+                  <input type="datetime-local" name="start_time" id="start_time">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li id="form-chexing">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">车型</div>
+                <div class="item-input">
+                  <select>
+                    <option value="0">请选择车型</option>
+                    <option value="1">轿车</option>
+                    <option value="2">越野车SUV</option>
+                    <option value="3">面包车</option>
+                    <option value="3">卡车</option></select>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- Select -->
+          <li id="form-kongzuoshu">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">座位数</div>
+                <div class="item-input">
+                  <input type="number" placeholder="请输入座位数" name="capacity"
+                         pattern="[0-9]*" id="capacity">
                 </div>
               </div>
             </div>
@@ -177,28 +184,24 @@
           <!-- Switch (Checkbox) -->
           <li>
             <div class="item-content">
-              <div class="item-media"><i class="icon icon-form-toggle"></i></div>
               <div class="item-inner">
-                <div class="item-title label">Switch</div>
+                <div class="item-title label">是否高速</div>
                 <div class="item-input">
                   <label class="label-switch">
-                    <input type="checkbox">
+                    <input type="checkbox" name="road_type">
                     <div class="checkbox"></div>
                   </label>
                 </div>
               </div>
             </div>
           </li>
-          <!-- Slider (Range input) -->
           <li>
             <div class="item-content">
-              <div class="item-media"><i class="icon icon-form-settings"></i></div>
               <div class="item-inner">
-                <div class="item-title label">Slider</div>
+                <div class="item-title label">过路费(元)</div>
                 <div class="item-input">
-                  <div class="range-slider">
-                    <input type="range" min="0" max="100" value="50" step="0.1">
-                  </div>
+                  <input type="text" placeholder="请输入过路费" name="road_toll"
+                         id="road_toll">
                 </div>
               </div>
             </div>
@@ -206,26 +209,51 @@
           <!-- Textarea -->
           <li class="align-top">
             <div class="item-content">
-              <div class="item-media"><i class="icon icon-form-comment"></i></div>
               <div class="item-inner">
-                <div class="item-title label">Textarea</div>
+                <div class="item-title label">补充说明</div>
                 <div class="item-input">
-                  <textarea></textarea>
+                  <textarea id="remarks" name="remarks"></textarea>
                 </div>
               </div>
             </div>
           </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">联系人</div>
+                <div class="item-input">
+                  <input type="text" placeholder="请输入联系人姓名" name="contact"
+                         id="contact">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title label">手机号</div>
+                <div class="item-input">
+                  <input type="tel" placeholder="请输入联系人手机" name="contact_info"
+                         id="contact_info">
+                </div>
+              </div>
+            </div>
+          </li>
+          <input type="hidden" name="openid" value="asdsad">
         </ul>
       </div>
       <div class="content-block">
-        <p>About</p>
-        <p><a href="#" class="close-popup">Close popup</a></p>
-        <p>Lorem ipsum dolor ...</p>
+        <div class="row">
+          <div class="col-50"><a href="#" class="button button-big button-fill color-red close-popup">取消</a></div>
+          <div class="col-50"><a href="#" class="button button-big button-fill color-green">发布</a></div>
+        </div>
       </div>
+
     </div>
     <!-- Path to Framework7 Library JS-->
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <!-- Path to your app js-->
+    <script type="text/javascript" src="lib/time-util/time-util.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
   </body>
 </html>
