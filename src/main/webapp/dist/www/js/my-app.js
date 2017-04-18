@@ -21,14 +21,8 @@ var pageNo = '0';
  * index.html
  */
 // index页启动时加载listTab
-$$.get('list.html',{},function (data) {
-    $$('#list-tab').html(data);
-    infoType = '0';
-    orderType = '1';
-    currentPage = '1';
-    getListInfos(infoType,orderType,currentPage);
-    initPullLoading();
-})
+showListTab();
+
 
 // 底部TAB点击
 $$('.tab-link').on('click',function (e) {
@@ -40,6 +34,11 @@ $$('.tab-link').on('click',function (e) {
     }
     $$.get(tabPage+'.html',{},function (data) {
         $$('#'+tabPage+'-tab').html(data);
+        switch(tabPage){
+        case 'list':
+        	showListTab();
+        break;
+        }
     })
 });
 
@@ -64,7 +63,9 @@ $$('.category').on('change',function (e) {
 // Pull to refresh content
 var ptrContent = $$('.pull-to-refresh-content');
 
-// Add 'refresh' listener on it
+/**
+ * 下拉刷新绑定
+ */
 ptrContent.on('refresh', function (e) {
     var  target = $$('.toolbar .tab-link').filter(function (index,el) {
         return $$(this).hasClass('active');
@@ -78,7 +79,6 @@ ptrContent.on('refresh', function (e) {
             $$('.info-list').html('');
         	getListInfos(infoType,orderType,currentPage);
             myApp.attachInfiniteScroll($$('.infinite-scroll'));
-            $$('.infinite-scroll-preloader').show();
             break;
         case 'lift-list':
             break;
@@ -88,6 +88,86 @@ ptrContent.on('refresh', function (e) {
     myApp.pullToRefreshDone();
 
 });
+
+/**
+ * 绑定点击事件
+ */
+$$(document).on('click',function (e) {
+    var target = $$(e.target);
+    // console.log(target);
+
+    //发布信息
+    if($$(target).hasClass('publish-from-submit')){
+    	publishInfoSubmit();
+    }
+
+    //按发布时间排序
+    if($$(target).hasClass('sort-publish-time')){
+
+        if (orderType != '1' && orderType !='2'){
+            orderType = '1';
+        }else {
+            orderType = orderType=='1'?'2':'1';
+        }
+        $(target).next('i').attr('class',orderType=='1'?'fa fa-sort-up':'fa fa-sort-down');
+        $$('.info-list').html('');
+        currentPage = '1';
+        getListInfos(infoType,orderType,currentPage);
+    }
+
+    //按出发时间排序
+    if($$(target).hasClass('sort-start-time')){
+        if (orderType != '3' && orderType !='4'){
+            orderType = '3';
+        }else {
+            orderType = orderType=='3'?'4':'3';
+        }
+        $$('.info-list').html('');
+        $(target).next('i').attr('class',orderType=='3'?'fa fa-sort-up':'fa fa-sort-down');
+        currentPage = '1';
+
+        getListInfos(infoType,orderType,currentPage);
+    }
+
+    //选择地点查询 提交
+    if($$(target).hasClass('choose-location-submit')){
+        var s = $$('.choose-location-s').val();
+        var d = $$('.choose-location-d').val();
+
+    }
+
+
+});
+
+/**
+ * 发布信息
+ * @returns
+ */
+function publishInfoSubmit(){
+	 var data =$('#publish-form').serializeObject();
+//     console.log(data);
+     var url = baseUrl+'information/publish';
+     $$.ajax({
+         url:url,
+         crossDomain:true,
+         async:false,
+         method:'POST',
+         contentType:'application/json',
+         data:JSON.stringify(data),
+         dataType:'json',
+         success:function (data) {
+             if (data == 1){
+            	 location.href = baseUrl+'wx/index.html';
+             }else{
+
+             }
+         },
+         error:function (data) {
+
+         }
+
+     });
+}
 
 //Loading flag
 var loading = false;
@@ -100,12 +180,12 @@ function initPullLoading(){
         "<div class='preloader'></div>"+
         "</div>";
 
-    $$('.page-content').append($$(preHtml));
+    $$('.page-content').append($$(preHtml).hide());
 
     // Attach 'infinite' event handler
     $$('.infinite-scroll').on('infinite', function () {
         console.log('上拉刷新');
-
+        $$('.infinite-scroll-preloader').show();
         // Exit, if loading in progress
         if (loading) return;
 
@@ -139,7 +219,16 @@ function initPullLoading(){
  */
 function parsePublishTime(publishTime) {
     var now = Date.parse(new Date());
-    return parseInt((now-publishTime)/1000/60);
+    var s = parseInt((now-publishTime)/1000);
+    if(s < 60)return s+'秒';
+    var m = parseInt(s/60);
+    if(m<60)return m+'分钟';
+    var h = parseInt(m/60);
+    if(h<24)return h+'小时';
+    var d = parseInt(h/24);
+    if(d<30)return d+'天';
+    var mo = parseInt(mo/30);
+    if(mo<12)return mo+'月';
 }
 
 
@@ -162,7 +251,7 @@ function appendInfoList(data) {
               "<div class='item-inner'>"+
                   "<div class='item-title-row'>"+
                      "<div class='item-title'>START_POS→DESTINATION</div>"+
-                      "<div class='item-after publish-time'>PUBLISH_TIME分钟前发布</div>"+
+                      "<div class='item-after publish-time'>PUBLISH_TIME前发布</div>"+
                   "</div>"+
                   "<div class='item-subtitle start-time'>出发日期：STARAT_TIME</div>"+
                   "<div class='item-text'>" +
@@ -192,6 +281,20 @@ function appendInfoList(data) {
 
 }
 
+/**
+ * 显示list.html
+ */
+function showListTab(){
+	$$.get('list.html',{},function (data) {
+	    $$('#list-tab').html(data);
+	    infoType = '0';
+	    orderType = '1';
+	    currentPage = '1';
+	    getListInfos(infoType,orderType,currentPage);
+	    initPullLoading();
+	});
+}
+
 
 /**
  * 获取列表信息
@@ -202,17 +305,35 @@ function appendInfoList(data) {
  *            1：发布时间升序；2：发布时间降序；3：出发时间升序；4出发时间降序
  * @param page
  *            请求页码
+ * @param start_pos
+ *             出发地点
+ * @param destination
+ *              终点
  */
-function getListInfos(type,order,page) {
-    console.log('请求信息列表：'+type+','+order+','+page);
-    var url = baseUrl+'information/get_list';
-    var data = {
-        "type":type,
-        "order":order,
-        "page":page
-    };
+function getListInfos(type,order,page,start_pos,destination) {
+    // console.log('请求信息列表：'+type+','+order+','+page);
+    var url,data;
+    if(start_pos == null || destination == null){
+        url = baseUrl+'information/get_list';
+        data = {
+            "type":type,
+            "order":order,
+            "page":page
+        };
+    }else{
+        url = baseUrl +'information/search';
+        data = {
+            "type":type,
+            "order":order,
+            "page":page,
+            "start_pos":start_pos,
+            "destination":destination
+        };
+    }
+
     $$.ajax({
         url:url,
+        crossDomain:true,
         async:false,
         method:'POST',
         contentType:'application/json',

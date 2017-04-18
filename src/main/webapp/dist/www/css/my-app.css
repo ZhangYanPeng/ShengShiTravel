@@ -66,3 +66,11 @@ span.category-dashunche {
   width:34px;
   height:34px;
 }        
+.sort-bar{
+    text-align: center;
+    color: #3498DB;
+}
+
+.page-content.pull-to-refresh-content.infinite-scroll.hide-bars-on-scroll.pull-to-refresh-no-navbar {
+    padding-top: 3em;
+}
