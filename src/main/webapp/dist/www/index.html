@@ -53,7 +53,7 @@
 
                 <div class="left sort-bar" style="transform: none;-webkit-transform: none;"><a class="sort-publish-time">发布时间</a> <i class="fa fa-sort-up"></i></div>
                 <div class="center sort-bar" style="transform: none;-webkit-transform: none; font-weight: normal;"><a class="sort-start-time">出发时间</a> <i class="fa fa-sort-up"></i></div>
-                <div class="right sort-bar" style="transform: none;-webkit-transform: none;"><a href="javascript:;" class="sort-choose-location"style="color: #3498db;">地点选择</a>
+                <div class="right sort-bar" style="transform: none;-webkit-transform: none;"><a href="#"  data-popover=".popover-choose-location" class="open-popover"style="color: #3498db;">地点选择</a>
                   <i class="fa fa-location-arrow"></i></div>
 
             </div>
@@ -115,8 +115,6 @@
       <div class="content-block-title">发布信息</div>
       <div class="list-block">
         <form method="post" id="publish-form" action="">
-
-
         <ul>
           <input type="hidden" name="type" id="type" value="0"/>
           <!-- Single radio input -->
@@ -269,6 +267,45 @@
       </div>
 
     </div>
+
+    <!--起点终点选择-->
+    <div class="popover popover-choose-location">
+      <!-- Popover's angle arrow -->
+      <div class="popover-angle"></div>
+
+      <!-- Popover content -->
+      <div class="popover-inner">
+        <!-- Any HTML content here -->
+        <div class="list-block">
+          <ul>
+            <li>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title label">起点</div>
+                  <div class="item-input">
+                    <input type="text" placeholder="请输入出发地" name="startpos" class="choose-location-s">
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title label">终点</div>
+                  <div class="item-input">
+                    <input type="text" placeholder="请输入目的地" name="destination" class="choose-location-d">
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="content-block">
+          <a href="#" class="button button-big button-fill color-green choose-location-submit">确定</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Path to Framework7 Library JS-->
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <!-- Path to your app js-->
