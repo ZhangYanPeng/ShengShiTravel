@@ -22,14 +22,14 @@ public class Information {
 	private long id;
 	
 	private int type;//有顺车，搭顺车
-	private Date publish_time;
-	private Date start_time;
+	private long publish_time;
+	private long start_time;
 	
 	private String startpos;
 	private String destination;
 	
 	private int capacity;
-	private int set_num;
+	private int car_type;
 	private double distance;
 	private double time;//消耗时间
 	private double road_toll; //过路费
@@ -67,19 +67,19 @@ public class Information {
 		this.type = type;
 	}
 
-	public Date getPublish_time() {
+	public long getPublish_time() {
 		return publish_time;
 	}
 
-	public void setPublish_time(Date publish_time) {
+	public void setPublish_time(long publish_time) {
 		this.publish_time = publish_time;
 	}
 
-	public Date getStart_time() {
+	public long getStart_time() {
 		return start_time;
 	}
 
-	public void setStart_time(Date start_time) {
+	public void setStart_time(long start_time) {
 		this.start_time = start_time;
 	}
 
@@ -91,12 +91,13 @@ public class Information {
 		this.capacity = capacity;
 	}
 
-	public int getSet_num() {
-		return set_num;
+	
+	public int getCar_type() {
+		return car_type;
 	}
 
-	public void setSet_num(int set_num) {
-		this.set_num = set_num;
+	public void setCar_type(int car_type) {
+		this.car_type = car_type;
 	}
 
 	public double getDistance() {

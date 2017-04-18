@@ -18,22 +18,22 @@
 	<myBody>
 	<div class="weui-panel__bd">
 		<div class="weui-media-box weui-media-box_text">
-			<h4 class="weui-media-box__title">(有顺车)榆林→府谷</h4>
-			<ul class="weui-media-box__info">
-				<li class="weui-media-box__info__meta">1小时前</li>
+			<h4 class="weui-media-box__title view-ds-title">(有顺车)榆林→府谷</h4>
+			<ul class="weui-media-box__info ">
+				<li class="weui-media-box__info__meta view-info-meta"><i  class="fa fa-clock-o"></i>1小时前</li>
 				<li
-					class="weui-media-box__info__meta weui-media-box__info__meta_extra">5人</li>
-				<li class="weui-media-box__info__meta"><a class="default-a">收藏</a></li>
+					class="weui-media-box__info__meta weui-media-box__info__meta_extra view-info-meta"><i  class="fa fa-eye"></i>5人</li>
+				<li class="weui-media-box__info__meta"><a class="default-a"><i class="fa fa-heart"></i>收藏</a></li>
 			</ul>
 		</div>
 	</div>
 	<div class="weui-panel__bd">
 		<div class="weui-media-box weui-media-box_text">
-			<h4 class="weui-media-box__title">基本信息</h4>
+			<h4 class="weui-media-box__title view-title">基本信息</h4>
 			<div class="weui-form-preview__bd">
 				<div class="weui-form-preview__item">
 					<label class="weui-form-preview__label">类型</label> <span
-						class="weui-form-preview__value">有顺车(轿车)</span>
+						class="weui-form-preview__value" ><span style="color: #3498db;">有顺车</span>(轿车)</span>
 				</div>
 				<div class="weui-form-preview__item">
 					<label class="weui-form-preview__label">出发时间</label> <span
@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div class="weui-media-box weui-media-box_text">
-			<h4 class="weui-media-box__title">路线信息</h4>
+			<h4 class="weui-media-box__title view-title">路线信息</h4>
 			<div class="weui-form-preview__bd">
 				<div class="weui-form-preview__item">
 					<label class="weui-form-preview__label">路线距离</label> <span
@@ -67,13 +67,13 @@
 			</div>
 		</div>
 		<div class="weui-media-box weui-media-box_text">
-			<h4 class="weui-media-box__title">其他说明</h4>
+			<h4 class="weui-media-box__title view-title">其他说明</h4>
 			<p>一路顺风</p>
 			<p class="default-shuoming">联系我时，请说是在xx顺车上看到的，谢谢！</p>
 			<a class="default-a" style="font-size: 0.6em;">点击这里查看更多榆林到府谷的信息</a>
 		</div>
 		<div class="weui-media-box weui-media-box_text">
-			<h4 class="weui-media-box__title">联系方式</h4>
+			<h4 class="weui-media-box__title view-title">联系方式</h4>
 			<div class="weui-form-preview__bd">
 				<div class="weui-form-preview__item">
 					<label class="weui-form-preview__label">联系人</label> <span

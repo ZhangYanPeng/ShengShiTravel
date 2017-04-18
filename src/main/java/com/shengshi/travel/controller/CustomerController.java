@@ -1,14 +1,21 @@
 package com.shengshi.travel.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.shengshi.travel.entity.Customer;
 import com.shengshi.travel.entity.Information;
@@ -23,37 +30,46 @@ public class CustomerController {
 	@Autowired
 	HttpSession session;
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(Customer customer){
-		Customer c = customerService.login(customer);
-		session.setAttribute("customer", c);
-		return "";
+	@RequestMapping(value = "/home")
+	public String home(){
+		return "/home";
+	}
+	
+	@RequestMapping(value = "/login_give", method = RequestMethod.POST)
+	public @ResponseBody String login_give(@RequestBody Customer customer){
+		customer = customerService.login(customer);
+		return "http://localhost:8080/travel/list?openid="+customer.getOpenid();
+	}
+	
+	@RequestMapping(value = "/login_take", method = RequestMethod.POST)
+	public @ResponseBody String login_take(@RequestBody Customer customer){
+		customer = customerService.login(customer);
+		return "http://localhost:8080/travel/lift_list?openid="+customer.getOpenid();
 	}
 
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public String view(Customer customer){
+	public @ResponseBody Customer view(Customer customer){
 		Customer c = customerService.login(customer);
 		session.setAttribute("customer", c);
-		return "";
+		return c;
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String edit(Customer customer){
+	public @ResponseBody Customer edit(Customer customer){
 		Customer c = customerService.edit(customer);
 		session.setAttribute("customer", c);
-		return "";
+		return c;
 	}
 	
-	@RequestMapping(value = "/view_publishment", method = RequestMethod.POST)
-	public String view_publishment(HttpServletRequest request, Customer customer){
-		request.setAttribute("publishments", customerService.viewInformation(customer));
-		return "";
+	@RequestMapping(value = "/get_publishment", method = RequestMethod.POST)
+	public @ResponseBody List get_publishment(@RequestBody Customer customer){
+		customer = customerService.login(customer);
+		return customerService.viewInformation(customer);
 	}
 	
-	@RequestMapping(value = "/view_focus", method = RequestMethod.POST)
-	public String view_focus(HttpServletRequest request, Customer customer){
-		request.setAttribute("focuses",customerService.viewFocus(customer));
-		return "";
+	@RequestMapping(value = "/get_focus", method = RequestMethod.POST)
+	public @ResponseBody List get_focus(@RequestBody Customer customer){
+		customer = customerService.login(customer);
+		return customerService.viewFocus(customer);
 	}
-	
 }
