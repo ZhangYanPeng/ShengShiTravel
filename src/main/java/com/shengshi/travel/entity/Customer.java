@@ -32,6 +32,7 @@ public class Customer {
 	private String headimgurl;
 	private String privilege;
 	private String unionid;
+	private String name;
 	
 	private String phone;
 	
@@ -152,6 +153,16 @@ public class Customer {
 
 	public void setInformations(List<Information> informations) {
 		this.informations = informations;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

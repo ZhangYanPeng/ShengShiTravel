@@ -48,16 +48,24 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/view", method = RequestMethod.POST)
-	public @ResponseBody Customer view(Customer customer){
-		Customer c = customerService.login(customer);
-		session.setAttribute("customer", c);
+	public @ResponseBody Customer view(String openid){
+		Customer c = new Customer();
+		c.setOpenid(openid);
+		c = customerService.login(c);
 		return c;
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public @ResponseBody Customer edit(Customer customer){
-		Customer c = customerService.edit(customer);
-		session.setAttribute("customer", c);
+		System.out.println(customer.getOpenid());
+		Customer c = customerService.login(customer);
+		c.setNickname(customer.getNickname());
+		c.setSex(customer.getSex());
+		c.setProvince(customer.getProvince());
+		c.setCity(customer.getCity());
+		c.setName(customer.getName());
+		c.setPhone(customer.getPhone());
+		c = customerService.edit(c);
 		return c;
 	}
 	
