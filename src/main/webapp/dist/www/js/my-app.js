@@ -133,7 +133,11 @@ $$(document).on('click',function (e) {
     if($$(target).hasClass('choose-location-submit')){
         var s = $$('.choose-location-s').val();
         var d = $$('.choose-location-d').val();
-
+        console.log(s+","+d);
+        $$('.info-list').html('');
+        currentPage = '1';
+        getListInfos(infoType,orderType,currentPage,s,d);
+        myApp.closeModal('.popover-choose-location');
     }
 
 
