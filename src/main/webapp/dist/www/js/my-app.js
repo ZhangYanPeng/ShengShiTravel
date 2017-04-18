@@ -21,14 +21,8 @@ var pageNo = '0';
  * index.html
  */
 // index页启动时加载listTab
-$$.get('list.html',{},function (data) {
-    $$('#list-tab').html(data);
-    infoType = '0';
-    orderType = '1';
-    currentPage = '1';
-    getListInfos(infoType,orderType,currentPage);
-    initPullLoading();
-})
+showListTab();
+
 
 // 底部TAB点击
 $$('.tab-link').on('click',function (e) {
@@ -40,6 +34,11 @@ $$('.tab-link').on('click',function (e) {
     }
     $$.get(tabPage+'.html',{},function (data) {
         $$('#'+tabPage+'-tab').html(data);
+        switch(tabPage){
+        case 'list':
+        	showListTab();
+        break;
+        }
     })
 });
 
@@ -78,7 +77,6 @@ ptrContent.on('refresh', function (e) {
             $$('.info-list').html('');
         	getListInfos(infoType,orderType,currentPage);
             myApp.attachInfiniteScroll($$('.infinite-scroll'));
-            $$('.infinite-scroll-preloader').show();
             break;
         case 'lift-list':
             break;
@@ -88,6 +86,73 @@ ptrContent.on('refresh', function (e) {
     myApp.pullToRefreshDone();
 
 });
+
+/**
+ * 绑定点击事件
+ */
+$$(document).on('click',function (e) {
+    var target = $$(e.target);
+    console.log(target);
+
+    //发布信息
+    if($$(target).hasClass('publish-from-submit')){
+    	publishInfoSubmit();
+    }
+
+    //按发布时间排序
+    if($$(target).hasClass('sort-publish-time')){
+        if (orderType != '1' && orderType !='2'){
+            orderType = 1;
+        }else {
+            orderType = orderType=='1'?'2':'1';
+        }
+
+        $$('.sort-publish-time').next().prop('class',orderType=='1'?'fa fa-sort-up':'fa fa-sort-down');
+    }
+
+    //按出发时间排序
+    if($$(target).hasClass('start-publish-time')){
+
+    }
+
+    //选择起始地址
+    if($$(target).hasClass('sort-choose-location')){
+
+    }
+
+
+
+});
+
+/**
+ * 发布信息
+ * @returns
+ */
+function publishInfoSubmit(){
+	 var data =$('#publish-form').serializeObject();
+//     console.log(data);
+     var url = baseUrl+'information/publish';
+     $$.ajax({
+         url:url,
+         crossDomain:true,
+         async:false,
+         method:'POST',
+         contentType:'application/json',
+         data:JSON.stringify(data),
+         dataType:'json',
+         success:function (data) {
+             if (data == 1){
+            	 location.href = baseUrl+'wx/index.html';
+             }else{
+
+             }
+         },
+         error:function (data) {
+
+         }
+
+     });
+}
 
 //Loading flag
 var loading = false;
@@ -100,12 +165,12 @@ function initPullLoading(){
         "<div class='preloader'></div>"+
         "</div>";
 
-    $$('.page-content').append($$(preHtml));
+    $$('.page-content').append($$(preHtml).hide());
 
     // Attach 'infinite' event handler
     $$('.infinite-scroll').on('infinite', function () {
         console.log('上拉刷新');
-
+        $$('.infinite-scroll-preloader').show();
         // Exit, if loading in progress
         if (loading) return;
 
@@ -192,6 +257,20 @@ function appendInfoList(data) {
 
 }
 
+/**
+ * 显示list.html
+ */
+function showListTab(){
+	$$.get('list.html',{},function (data) {
+	    $$('#list-tab').html(data);
+	    infoType = '0';
+	    orderType = '1';
+	    currentPage = '1';
+	    getListInfos(infoType,orderType,currentPage);
+	    initPullLoading();
+	});
+}
+
 
 /**
  * 获取列表信息
@@ -213,6 +292,7 @@ function getListInfos(type,order,page) {
     };
     $$.ajax({
         url:url,
+        crossDomain:true,
         async:false,
         method:'POST',
         contentType:'application/json',

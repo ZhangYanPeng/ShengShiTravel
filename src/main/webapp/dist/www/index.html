@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/framework7.ios.min.css">
     <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
     <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/my-app.css">
 
 
@@ -45,12 +46,26 @@
     <div class="views">
       <!-- Your main view, should have "view-main" class-->
       <div class="view view-main">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <!-- Sub navbar -->
+            <div class="subnavbar">
+
+                <div class="left sort-bar" style="transform: none;-webkit-transform: none;"><a class="sort-publish-time">发布时间</a> <i class="fa fa-sort-up"></i></div>
+                <div class="center sort-bar" style="transform: none;-webkit-transform: none; font-weight: normal;"><a class="sort-start-time">出发时间</a> <i class="fa fa-sort-up"></i></div>
+                <div class="right sort-bar" style="transform: none;-webkit-transform: none;"><a href="javascript:;" class="sort-choose-location"style="color: #3498db;">地点选择</a>
+                  <i class="fa fa-location-arrow"></i></div>
+
+            </div>
+
+          </div>
+        </div>
         <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
-        <div class="pages no-navbar toolbar-through">
+        <div class="pages toolbar-through">
           <!-- Page, data-page contains page name-->
-          <div data-page="index" class="page">
+          <div data-page="index" class="page with-subnavbar">
             <!-- Scrollable page content-->
-            <div class="page-content pull-to-refresh-content  infinite-scroll">
+            <div class="page-content pull-to-refresh-content  infinite-scroll hide-bars-on-scroll">
               <!-- Default pull to refresh layer-->
               <div class="pull-to-refresh-layer">
                 <div class="preloader"></div>
@@ -99,6 +114,9 @@
     <div class="popup popup-publish">
       <div class="content-block-title">发布信息</div>
       <div class="list-block">
+        <form method="post" id="publish-form" action="">
+
+
         <ul>
           <input type="hidden" name="type" id="type" value="0"/>
           <!-- Single radio input -->
@@ -159,12 +177,12 @@
               <div class="item-inner">
                 <div class="item-title label">车型</div>
                 <div class="item-input">
-                  <select>
+                  <select name="chexing">
                     <option value="0">请选择车型</option>
                     <option value="1">轿车</option>
                     <option value="2">越野车SUV</option>
                     <option value="3">面包车</option>
-                    <option value="3">卡车</option></select>
+                    <option value="4">卡车</option></select>
                 </div>
               </div>
             </div>
@@ -241,11 +259,12 @@
           </li>
           <input type="hidden" name="openid" value="asdsad">
         </ul>
+        </form>
       </div>
       <div class="content-block">
         <div class="row">
           <div class="col-50"><a href="#" class="button button-big button-fill color-red close-popup">取消</a></div>
-          <div class="col-50"><a href="#" class="button button-big button-fill color-green">发布</a></div>
+          <div class="col-50"><a href="#" class="button button-big button-fill color-green publish-from-submit">发布</a></div>
         </div>
       </div>
 
@@ -253,6 +272,8 @@
     <!-- Path to Framework7 Library JS-->
     <script type="text/javascript" src="js/framework7.min.js"></script>
     <!-- Path to your app js-->
+    <script type="text/javascript" src="lib/jquery/jquery.js"></script>
+    <script type="text/javascript" src="lib/json_serialize/json.js"></script>
     <script type="text/javascript" src="lib/time-util/time-util.js"></script>
     <script type="text/javascript" src="js/my-app.js"></script>
   </body>
