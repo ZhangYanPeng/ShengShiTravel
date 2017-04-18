@@ -25,3 +25,52 @@ i.tab-icon-4{
     height: 1.5em;
     background-image: url("../img/user.png");
 }
+
+.list-block .item-title.label+.item-input {
+    margin-left: 2em;
+
+}
+.item-subtitle.start-time {
+    color: #8e8e93;
+}
+
+span.category-youshunche {
+    margin-right: 1em;
+    background: #0393f3;
+    color: white;
+    font-size: 1em;
+}
+
+span.category-dashunche {
+    margin-right: 1em;
+    background: #11f364;
+    color: white;
+    font-size: 1em;
+}
+
+.item-after.publish-time {
+    font-size: 0.3em;
+    padding-top: 0.4em;
+}
+
+.avatar img {
+    width: 4.1em;
+}
+
+.infinite-scroll-preloader {
+  margin-top:-20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.infinite-scroll-preloader .preloader {
+  width:34px;
+  height:34px;
+}        
+.sort-bar{
+    text-align: center;
+    color: #3498DB;
+}
+
+.page-content.pull-to-refresh-content.infinite-scroll.hide-bars-on-scroll.pull-to-refresh-no-navbar {
+    padding-top: 3em;
+}
