@@ -12,4 +12,5 @@ public interface InformationService{
 	public int edit(Information information);
 	public PageResults<Information> list(int type, int order, int pageNo);
 	public PageResults<Information> search(Information information, int type, int pageNo);
+	public Information read(long information_id);
 }

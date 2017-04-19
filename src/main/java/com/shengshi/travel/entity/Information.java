@@ -32,10 +32,13 @@ public class Information {
 	private int car_type;
 	private double distance;
 	private double time;//消耗时间
+	private int road_type;
 	private double road_toll; //过路费
 	private String remarks;
 	private String contact;
 	private String contact_info;
+	
+	private int read_times;
 	
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -170,6 +173,22 @@ public class Information {
 
 	public void setDestination(String destination) {
 		this.destination = destination;
+	}
+
+	public int getRoad_type() {
+		return road_type;
+	}
+
+	public void setRoad_type(int road_type) {
+		this.road_type = road_type;
+	}
+
+	public int getRead_times() {
+		return read_times;
+	}
+
+	public void setRead_times(int read_times) {
+		this.read_times = read_times;
 	}
 	
 	

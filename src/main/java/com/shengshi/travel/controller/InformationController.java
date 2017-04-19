@@ -98,4 +98,10 @@ public class InformationController {
 		Information information = informationService.get(information_id);
 		return customerService.focus(customer, information, type);
 	}
+	
+	@RequestMapping(value = "/read", method = RequestMethod.POST)
+	public @ResponseBody Information read(long information_id){
+		Information information = informationService.read(information_id);
+		return information;
+	}
 }
