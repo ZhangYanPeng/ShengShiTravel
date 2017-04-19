@@ -69,7 +69,9 @@ $$('.category').on('change',function (e) {
 // Pull to refresh content
 var ptrContent = $$('.pull-to-refresh-content');
 
-// Add 'refresh' listener on it
+/**
+ * 下拉刷新
+ */
 ptrContent.on('refresh', function (e) {
     var  target = $$('.toolbar .tab-link').filter(function (index,el) {
         return $$(this).hasClass('active');
@@ -107,18 +109,30 @@ $$(document).on('click',function (e) {
 
     //按发布时间排序
     if($$(target).hasClass('sort-publish-time')){
+
         if (orderType != '1' && orderType !='2'){
-            orderType = 1;
+            orderType = '1';
         }else {
             orderType = orderType=='1'?'2':'1';
         }
-
-        $$('.sort-publish-time').next().prop('class',orderType=='1'?'fa fa-sort-up':'fa fa-sort-down');
+        $(target).next('i').attr('class',orderType=='1'?'fa fa-sort-up':'fa fa-sort-down');
+        $$('.info-list').html('');
+        currentPage = '1';
+        getListInfos(infoType,orderType,currentPage);
     }
 
     //按出发时间排序
-    if($$(target).hasClass('start-publish-time')){
+    if($$(target).hasClass('sort-start-time')){
+        if (orderType != '3' && orderType !='4'){
+            orderType = '3';
+        }else {
+            orderType = orderType=='3'?'4':'3';
+        }
+        $$('.info-list').html('');
+        $(target).next('i').attr('class',orderType=='3'?'fa fa-sort-up':'fa fa-sort-down');
+        currentPage = '1';
 
+        getListInfos(infoType,orderType,currentPage);
     }
 
     //选择起始地址
