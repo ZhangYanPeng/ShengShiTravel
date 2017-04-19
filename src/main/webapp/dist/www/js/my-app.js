@@ -232,7 +232,9 @@ $$(document).on('click',function(e) {
  * 
  * @returns
  */
+function getRoadInfo(s,d);
 function publishInfoSubmit() {
+	getRoadInfo($$("#startpos").val(),$$("#destination").val);
 	var data = $('#publish-form').serializeObject();
 	// console.log(data);
 	var url = baseUrl + 'information/publish';
@@ -483,4 +485,7 @@ function showPersonalInfo() {
 			$$("#phone").html(info.phone);
 		}
 	});
+}
+function getRoadInfo(s,d){
+	
 }

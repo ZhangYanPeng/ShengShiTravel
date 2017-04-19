@@ -32,8 +32,8 @@ public class InformationController {
 	
 	@RequestMapping(value = "/publish", method = RequestMethod.POST)
 	public @ResponseBody int publish(@RequestBody Map map){
-		System.out.println(map);
 		Information information = new Information();
+		information.setId(Long.valueOf((String)map.get("id")));
 		if( Integer.valueOf((String) map.get("type")) == 0 ){
 			information.setCapacity(Integer.valueOf((String) map.get("capacity")));
 			information.setCar_type(Integer.valueOf((String)map.get("chexing")));
@@ -54,8 +54,8 @@ public class InformationController {
 		information.setStartpos((String) map.get("startpos"));
 		information.setDestination((String) map.get("destination"));
 		//TODO
-		//information.setDistance(Double.valueOf((String) map.get("distance")));
-		//information.setTime(Double.valueOf((String) map.get("time")));
+		information.setDistance(Double.valueOf((String) map.get("distance")));
+		information.setTime(Double.valueOf((String) map.get("time")));
 		information.setRoad_toll(Double.valueOf((String) map.get("road_toll")));
 		information.setRemarks((String) map.get("remarks"));
 		information.setContact((String) map.get("contact"));
@@ -100,8 +100,8 @@ public class InformationController {
 	}
 	
 	@RequestMapping(value = "/read", method = RequestMethod.POST)
-	public @ResponseBody Information read(long information_id){
-		Information information = informationService.read(information_id);
+	public @ResponseBody Information read(String information_id){
+		Information information = informationService.read(Long.valueOf(information_id));
 		return information;
 	}
 }
