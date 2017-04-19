@@ -111,7 +111,10 @@ public class CustomerServiceImpl implements CustomerService {
 		// TODO Auto-generated method stub
 		information.setCustomer(customer);
 		customerDAO.update(customer);
-		imformationDAO.save(information);
+		if(information.getId()==-1)
+			imformationDAO.update(information);
+		else
+			imformationDAO.save(information);
 		return 1;
 	}
 

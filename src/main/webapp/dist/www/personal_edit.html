@@ -1,0 +1,135 @@
+<div class="pages">
+	<!-- Page, data-page contains page name-->
+	<div data-page="personal_edit" class="page">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<div class="left">
+					<a href="#" class="back link"> <i class="icon icon-back"></i><span>取消</span></a>
+				</div>
+				<div class="center sliding"></div>
+				<div class="right">
+					<!-- Right link contains only icon - additional "icon-only" class-->
+					<a href="#" id="save_personal" class="link icon-only open-panel">保存</a>
+				</div>
+			</div>
+		</div>
+		<div class="page-content">
+			<div class="content-block">
+				<div class="content-block-inner">
+					<form id="personal-form" class="list-block store-data">
+						<ul>
+							<!-- Text inputs -->
+							<li hidden="hidden">
+								<div class="item-content">
+									<div class="item-media">
+										<i class="icon icon-form-name"></i>
+									</div>
+									<div class="item-inner">
+										<div class="item-title label">openid</div>
+										<div class="item-input">
+											<input id="openid_edit" name="openid" type="text"
+												placeholder="openid">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li hidden="hidden">
+								<div class="item-content">
+									<div class="item-media">
+										<i class="icon icon-form-name"></i>
+									</div>
+									<div class="item-inner">
+										<div class="item-title label">头像</div>
+										<div class="item-input">
+											<input id="headimgurl_edit" type="text"
+												placeholder="headimgurl" name="headimgurl">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li id="li_nickname">
+								<div class="item-content">
+									<div class="item-media">
+										<i class="icon icon-form-name"></i>
+									</div>
+									<div class="item-inner">
+										<div class="item-title label">昵称</div>
+										<div class="item-input">
+											<input id="nickname_edit" name="nickname" type="text"
+												placeholder="请输入昵称">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li id="li_sex">
+								<div class="item-content">
+									<div class="item-media">
+										<i class="icon icon-form-name"></i>
+									</div>
+									<div class="item-inner">
+										<div class="item-title label">性别</div>
+										<div class="item-input">
+											<select id="sex_edit" name="sex">
+												<option value="0">保密</option>
+												<option value="1">男</option>
+												<option value="2">女</option>
+											</select>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li id="li_address">
+								<div class="item-content">
+									<div class="item-media">
+										<i class="icon icon-form-name"></i>
+									</div>
+									<div class="item-inner">
+										<div class="item-title label">地址</div>
+										<div class="item-input">
+											<ul>
+												<li><input id="country_edit" name="country"
+													type="hidden"></li>
+												<li><input id="province_edit" name="province"
+													type="text" placeholder="请输入省份"></li>
+												<li><input id="city_edit" name="city" type="text"
+													placeholder="请输入城市"></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li id="li_name">
+								<div class="item-content">
+									<div class="item-media">
+										<i class="icon icon-form-name"></i>
+									</div>
+									<div class="item-inner">
+										<div class="item-title label">姓名</div>
+										<div class="item-input">
+											<input id="name_edit" name="name" type="text"
+												placeholder="请输入真实姓名">
+										</div>
+									</div>
+								</div>
+							</li>
+							<li id="li_phone">
+								<div class="item-content">
+									<div class="item-media">
+										<i class="icon icon-form-name"></i>
+									</div>
+									<div class="item-inner">
+										<div class="item-title label">手机号</div>
+										<div class="item-input">
+											<input id="phone_edit" name="phone" type="text"
+												placeholder="请输入手机号">
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

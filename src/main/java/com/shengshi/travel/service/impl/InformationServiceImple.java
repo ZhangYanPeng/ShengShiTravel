@@ -3,6 +3,8 @@ package com.shengshi.travel.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.text.InternationalFormatter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,6 +77,16 @@ public class InformationServiceImple implements InformationService {
 		}
 		Object[] values = {information.getType()};
 		return informationDAO.findPageByFetchedHql(hql, countHql, pageNo, Constants.pageSize, values);
+	}
+
+	@Override
+	@Transactional
+	public Information read(long information_id) {
+		// TODO Auto-generated method stub
+		Information information = informationDAO.get(information_id);
+		information.setRead_times(information.getRead_times()+1);
+		informationDAO.update(information);
+		return information;
 	}
 
 }
