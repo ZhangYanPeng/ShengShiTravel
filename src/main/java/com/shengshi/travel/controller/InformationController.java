@@ -89,7 +89,7 @@ public class InformationController {
 	}
 	
 	@RequestMapping(value = "/get_information", method = RequestMethod.POST)
-	public @ResponseBody Information get_information(@RequestBody String information_id){
+	public @ResponseBody Information get_information(String information_id){
 		return informationService.get(Long.valueOf(information_id));
 	}
 	
