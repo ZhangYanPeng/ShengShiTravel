@@ -36,7 +36,10 @@ $$('.tab-link').on('click', function(e) {
 		$$('#' + tabPage + '-tab').html(data);
 		switch (tabPage) {
 		case 'list':
-			showListTab();
+			showListTab('0');
+			break;
+		case 'lift-list':
+			
 			break;
 		case 'me':
 			showPersonalInfo();
@@ -166,7 +169,7 @@ $$(document).on('click',function(e) {
  * @param id
  */
 function getInfoView(id) {
-	var url = baseUrl + 'information/get_information';
+	var url = baseUrl + 'information/read';
     $$.ajax({
         url : url,
         crossDomain : true,
@@ -178,8 +181,10 @@ function getInfoView(id) {
         dataType : 'json',
         success : function(data) {
            	data = infoFormat(data);
+           	console.log(data);
 			$$('.info-view-header-title').text('('+data.type+')'+data.startpos+'→'+data.destination);
 			$$('.info-view-header-publish-time').text(data.publish_time+'前');
+			$$('.info-view-header-view-count').text(data.read_times+'人');
 			$$('.info-view-content-type').text(data.type+'('+data.car_type+')');
 			$$('.info-view-content-start-time').text(data.start_time);
 			$$('.info-view-content-pos').text(data.startpos+'→'+data.destination);
@@ -386,13 +391,13 @@ function appendInfoList(data) {
 /**
  * 显示list.html
  */
-function showListTab() {
+function showListTab(type) {
+    infoType = type;
+    orderType = '1';
+    currentPage = '1';
 	$$('.subnavbar').show();
 	$$.get('list.html', {}, function(data) {
 		$$('#list-tab').html(data);
-		infoType = '0';
-		orderType = '1';
-		currentPage = '1';
 		getListInfos(infoType, orderType, currentPage);
 		initPullLoading();
 	});
