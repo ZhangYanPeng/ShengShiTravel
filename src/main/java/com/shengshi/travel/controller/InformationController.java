@@ -53,6 +53,7 @@ public class InformationController {
 		}
 		information.setStartpos((String) map.get("startpos"));
 		information.setDestination((String) map.get("destination"));
+		information.setRoad_type(Integer.valueOf((String)map.get("road_type")));
 		//TODO
 		information.setDistance(Double.valueOf((String) map.get("distance")));
 		information.setTime(Double.valueOf((String) map.get("time")));
