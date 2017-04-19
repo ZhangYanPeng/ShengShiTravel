@@ -9,7 +9,8 @@ var mainView = myApp.addView('.view-main', {
 
 });
 
-var baseUrl = "http://localhost:8080/travel/";
+var baseUrl = getRootPath();
+// console.log(baseUrl);
 
 var infoType = '0';// 列表类型
 var orderType = '1';// 排序
@@ -49,9 +50,9 @@ $$('.tab-link').on('click', function(e) {
  */
 $$(document).on('pageInit', function (e) {
     var page = e.detail.page;
-    console.log(page);
+    // console.log(page);
     if(page.name == 'info-view'){
-    	console.log(page.query.information_id);
+		getInfoView(page.query.information_id);
 	}
 });
 // publish popup form change
@@ -104,10 +105,7 @@ ptrContent.on('refresh', function(e) {
 /**
  * 绑定点击事件
  */
-$$(document)
-		.on(
-				'click',
-				function(e) {
+$$(document).on('click',function(e) {
 					var target = $$(e.target);
 					// console.log(target);
 
@@ -161,7 +159,79 @@ $$(document)
 						myApp.closeModal('.popover-choose-location');
 					}
 
-				});
+});
+
+/**
+ * 获取详细信息
+ * @param id
+ */
+function getInfoView(id) {
+	var url = baseUrl + 'information/get_information';
+    $$.ajax({
+        url : url,
+        crossDomain : true,
+        async : false,
+        method : 'POST',
+        data : {
+        	information_id:id
+		},
+        dataType : 'json',
+        success : function(data) {
+           	data = infoFormat(data);
+			$$('.info-view-header-title').text('('+data.type+')'+data.startpos+'→'+data.destination);
+			$$('.info-view-header-publish-time').text(data.publish_time+'前');
+			$$('.info-view-content-type').text(data.type+'('+data.car_type+')');
+			$$('.info-view-content-start-time').text(data.start_time);
+			$$('.info-view-content-pos').text(data.startpos+'→'+data.destination);
+			$$('.info-view-content-capacity').text(data.capacity);
+			$$('.info-view-content-distance').text(data.distance+'公里');
+			$$('.info-view-content-during-time').text(data.time);
+			//TODO
+			$$('.info-view-content-is-gaosu').text('你猜');
+			$$('.info-view-content-road-toll').text('约'+data.road_toll+'元');
+			$$('.info-view-content-remarks').text(data.remarks);
+			$$('.info-view-content-more-text').text(data.startpos+'到'+data.destination);
+			$$('.info-view-content-contact').text(data.contact);
+			$$('.info-view-content-contact-info').text(data.contact_info);
+
+			$$('.give-me-call').prop('href','tel:'+data.contact_info);
+            $$('.give-me-sms').prop('href','sms:'+data.contact_info);
+        },
+        error : function(data) {
+
+        }
+
+    });
+}
+
+/**
+ * 格式化info数据
+ * @param data
+ * @returns {*}
+ */
+function infoFormat(data) {
+	data.type = data.type=='0'?'有顺车':'搭顺车';
+	data.publish_time = parsePublishTime(data.publish_time);
+	data.start_time = getFormatDateByLong(data.start_time, 'yyyy年MM月dd日hh:mm');
+	var carType = data.car_type;
+	switch (carType){
+		case 1:
+			data.car_type = '轿车';
+			break;
+        case 2:
+            data.car_type = '越野车SUV';
+            break;
+        case 3:
+            data.car_type = '面包车';
+            break;
+        case 4:
+            data.car_type = '卡车';
+            break;
+		default:
+			data.car_type = '未知车型';
+	}
+	return data;
+}
 
 /**
  * 发布信息
@@ -485,4 +555,20 @@ function showPersonalInfo() {
 			});
 		}
 	});
+}
+/**
+ * 获取根目录
+ * @returns {string}
+ */
+function getRootPath() {
+    //获取当前网址，如： http://localhost:8080/ems/Pages/Basic/Person.jsp
+    var curWwwPath = window.document.location.href;
+    //获取主机地址之后的目录，如： /ems/Pages/Basic/Person.jsp
+    var pathName = window.document.location.pathname;
+    var pos = curWwwPath.indexOf(pathName);
+    //获取主机地址，如： http://localhost:8080
+    var localhostPath = curWwwPath.substring(0, pos);
+    //获取带"/"的项目名，如：/ems
+    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+    return(localhostPath + projectName+"/");
 }

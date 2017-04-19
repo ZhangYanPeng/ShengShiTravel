@@ -49,7 +49,7 @@ span.category-dashunche {
 }
 
 .item-after.publish-time {
-    font-size: 0.3em;
+    font-size: 0.8em;
     padding-top: 0.4em;
 }
 
@@ -73,4 +73,17 @@ span.category-dashunche {
 
 .page-content.pull-to-refresh-content.infinite-scroll.hide-bars-on-scroll.pull-to-refresh-no-navbar {
     padding-top: 3em;
+}
+.info-view-header-items li{
+    float: left;
+    list-style: none;
+    margin: 0.5em;
+}
+.info-view-item-right{
+    text-align: right;
+}
+
+.info-view-content .content-block-title{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
