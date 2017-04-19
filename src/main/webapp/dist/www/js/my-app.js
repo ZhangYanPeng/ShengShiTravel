@@ -44,6 +44,16 @@ $$('.tab-link').on('click', function(e) {
 	});
 });
 
+/**
+ * 初始化页面
+ */
+$$(document).on('pageInit', function (e) {
+    var page = e.detail.page;
+    console.log(page);
+    if(page.name == 'info-view'){
+    	console.log(page.query.information_id);
+	}
+});
 // publish popup form change
 $$('.category').on('change', function(e) {
 	var target = $$(e.target);
@@ -264,7 +274,7 @@ function appendInfoList(data) {
 
 	$$.each(data.results, function(i, info) {
 		// console.log(info);
-		var preHtml = "<li><a href='info-view.html'>"
+		var preHtml = "<li><a href='info-view.html?information_id="+info.id+"'>"
 				+ "<div class='item-link item-content'>"
 				+ "<div class='item-media avatar'>"
 				+ "<img  src='./img/0.jpg'>"
