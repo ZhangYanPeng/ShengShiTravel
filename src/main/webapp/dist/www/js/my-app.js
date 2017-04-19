@@ -54,6 +54,54 @@ $$(document).on('pageInit', function (e) {
     if(page.name == 'info-view'){
 		getInfoView(page.query.information_id);
 	}
+    
+    if(page.name == 'personal_edit' ){
+    	// personal information load
+    	$$.ajax({
+    		async : false,
+    		cache : false,
+    		type : 'POST',
+    		crossDomain : true,
+    		dataType : 'json',
+    		data : {
+    			'openid' : openid,
+    		},
+    		url : "http://localhost:8080/travel/customer/view",
+    		error : function(data) {// 请求失败处理函数
+    			alert("获取数据失败！");
+    		},
+    		success : function(data) {
+    			var info = data;
+    			
+				$$("#li_nickname").hide();
+				$$("#li_sex").hide();
+				$$("#li_address").hide();
+				$$("#li_name").hide();
+				$$("#li_phone").hide();
+				$$("#openid_edit").val(info.openid);
+				$$("#headimgurl_edit").val(info.headimgurl);
+				$$("#nickname_edit").val(info.nickname);
+				$$("#sex_edit").val(info.sex);
+				$$("#country_edit").val(info.country);
+				$$("#province_edit").val(info.province);
+				$$("#city_edit").val(info.city);
+				$$("#name_edit").val(info.name);
+				$$("#phone_edit").val(info.phone);
+				
+				var content = page.query.content;
+				if(content == "nickname")
+					$$("#li_nickname").show();
+				if(content == "sex")
+					$$("#li_sex").show();
+				if(content == "address")
+					$$("#li_address").show();
+				if(content == "name")
+					$$("#li_name").show();
+				if(content == "phone")
+					$$("#li_phone").show();
+    		}
+    	});
+	}
 });
 // publish popup form change
 $$('.category').on('change', function(e) {
@@ -106,59 +154,78 @@ ptrContent.on('refresh', function(e) {
  * 绑定点击事件
  */
 $$(document).on('click',function(e) {
-					var target = $$(e.target);
-					// console.log(target);
+	var target = $$(e.target);
+	// console.log(target);
 
-					// 发布信息
-					if ($$(target).hasClass('publish-from-submit')) {
-						publishInfoSubmit();
-					}
+	// 发布信息
+	if ($$(target).hasClass('publish-from-submit')) {
+		publishInfoSubmit();
+	}
 
-					// 按发布时间排序
-					if ($$(target).hasClass('sort-publish-time')) {
+	// 按发布时间排序
+	if ($$(target).hasClass('sort-publish-time')) {
 
-						if (orderType != '1' && orderType != '2') {
-							orderType = '1';
-						} else {
-							orderType = orderType == '1' ? '2' : '1';
-						}
-						$(target).next('i').attr(
-								'class',
-								orderType == '1' ? 'fa fa-sort-up'
-										: 'fa fa-sort-down');
-						$$('.info-list').html('');
-						currentPage = '1';
-						getListInfos(infoType, orderType, currentPage);
-					}
+		if (orderType != '1' && orderType != '2') {
+			orderType = '1';
+		} else {
+			orderType = orderType == '1' ? '2' : '1';
+		}
+		$(target).next('i').attr(
+				'class',
+				orderType == '1' ? 'fa fa-sort-up'
+						: 'fa fa-sort-down');
+		$$('.info-list').html('');
+		currentPage = '1';
+		getListInfos(infoType, orderType, currentPage);
+	}
 
-					// 按出发时间排序
-					if ($$(target).hasClass('sort-start-time')) {
-						if (orderType != '3' && orderType != '4') {
-							orderType = '3';
-						} else {
-							orderType = orderType == '3' ? '4' : '3';
-						}
-						$$('.info-list').html('');
-						$(target).next('i').attr(
-								'class',
-								orderType == '3' ? 'fa fa-sort-up'
-										: 'fa fa-sort-down');
-						currentPage = '1';
+	// 按出发时间排序
+	if ($$(target).hasClass('sort-start-time')) {
+		if (orderType != '3' && orderType != '4') {
+			orderType = '3';
+		} else {
+			orderType = orderType == '3' ? '4' : '3';
+		}
+		$$('.info-list').html('');
+		$(target).next('i').attr(
+				'class',
+				orderType == '3' ? 'fa fa-sort-up'
+						: 'fa fa-sort-down');
+		currentPage = '1';
 
-						getListInfos(infoType, orderType, currentPage);
-					}
+		getListInfos(infoType, orderType, currentPage);
+	}
 
-					// 选择地点查询 提交
-					if ($$(target).hasClass('choose-location-submit')) {
-						var s = $$('.choose-location-s').val();
-						var d = $$('.choose-location-d').val();
-						console.log(s + "," + d);
-						$$('.info-list').html('');
-						currentPage = '1';
-						getListInfos(infoType, orderType, currentPage, s, d);
-						myApp.closeModal('.popover-choose-location');
-					}
-
+	// 选择地点查询 提交
+	if ($$(target).hasClass('choose-location-submit')) {
+		var s = $$('.choose-location-s').val();
+		var d = $$('.choose-location-d').val();
+		console.log(s + "," + d);
+		$$('.info-list').html('');
+		currentPage = '1';
+		getListInfos(infoType, orderType, currentPage, s, d);
+		myApp.closeModal('.popover-choose-location');
+	}
+	
+	if(e.srcElement.id=="save_personal"){
+		var storedData = myApp.formToJSON("#personal-form");
+		$$.ajax({
+			async : false,
+			cache : false,
+			type : 'POST',
+			crossDomain : true,
+			dataType : 'json',
+			data : storedData,
+			error : function(data) {// 请求失败处理函数
+				alert("获取数据失败！");
+			},
+			url : "http://localhost:8080/travel/customer/edit",
+			success : function(data) {
+				mainView.router.back();
+				showPersonalInfo();
+			}
+		});
+	}
 });
 
 /**
@@ -473,7 +540,7 @@ function showPersonalInfo() {
 		crossDomain : true,
 		dataType : 'json',
 		data : {
-			'openid' : 'OPENID',
+			'openid' : openid,
 		},
 		url : "http://localhost:8080/travel/customer/view",
 		error : function(data) {// 请求失败处理函数
@@ -487,72 +554,6 @@ function showPersonalInfo() {
 			$$("#address").html(info.province + "," + info.city);
 			$$("#name").html(info.name);
 			$$("#phone").html(info.phone);
-
-			function init_personal() {
-				myApp.popup('.popup-personal-info');
-				$$("#li_nickname").hide();
-				$$("#li_sex").hide();
-				$$("#li_address").hide();
-				$$("#li_name").hide();
-				$$("#li_phone").hide();
-				$$("#openid_edit").val(info.openid);
-				$$("#headimgurl_edit").val(info.headimgurl);
-				$$("#nickname_edit").val(info.nickname);
-				$$("#sex_edit").val(info.sex);
-				$$("#country_edit").val(info.country);
-				$$("#province_edit").val(info.province);
-				$$("#city_edit").val(info.city);
-				$$("#name_edit").val(info.name);
-				$$("#phone_edit").val(info.phone);
-			}
-			;
-
-			$$("#href_nickname").on('click', function() {
-				init_personal();
-				$$("#li_nickname").show();
-			});
-			$$("#href_sex").on('click', function() {
-				init_personal();
-				$$("#li_sex").show();
-			});
-			$$("#href_address").on('click', function() {
-				init_personal();
-				$$("#li_address").show();
-			});
-			$$("#href_name").on('click', function() {
-				init_personal();
-				$$("#li_name").show();
-			});
-			$$("#href_phone").on('click', function() {
-				init_personal();
-				$$("#li_phone").show();
-			});
-
-			$$('.popup-personal-info').on('close', function() {
-				var storedData = myApp.formToJSON("#personal-form");
-				$$.ajax({
-					async : false,
-					cache : false,
-					type : 'POST',
-					crossDomain : true,
-					dataType : 'json',
-					data : storedData,
-					error : function(data) {// 请求失败处理函数
-						alert("获取数据失败！");
-					},
-					url : "http://localhost:8080/travel/customer/edit",
-					success : function(data) {
-						info = data;
-						$$("#headimgurl").attr("src", data.headimgurl);
-						$$("#nickname").html(data.nickname);
-						$$("#sex").html(parseSex(data.sex));
-						$$("#address").html(data.province + "," + data.city);
-						$$("#name").html(data.name);
-						$$("#phone").html(data.phone);
-						init_personal();
-					}
-				});
-			});
 		}
 	});
 }
