@@ -11,6 +11,7 @@ var mainView = myApp.addView('.view-main', {
 
 var baseUrl = getRootPath();
 // console.log(baseUrl);
+var openid='OPENID';
 
 var infoType = '0';// 列表类型
 var orderType = '1';// 排序
@@ -27,27 +28,55 @@ showListTab();
 // 底部TAB点击
 $$('.tab-link').on('click', function(e) {
 	var tabPage = $$(e.target).parent().prop('id');
-	// console.log(tabPage);
+	console.log(tabPage);
 	if (tabPage == 'publish') {
 		myApp.popup('.popup-publish');
 		return;
 	}
-	$$.get(tabPage + '.html', {}, function(data) {
-		$$('#' + tabPage + '-tab').html(data);
-		switch (tabPage) {
-		case 'list':
-			infoType = '0';
-			showListTab('0');
-			break;
-		case 'lift-list':
-			infoType = '1'
-			showListTab();
-			break;
-		case 'me':
-			showPersonalInfo();
-			break;
-		}
-	});
+
+	if (tabPage == 'list' || tabPage == 'lift-list'){
+		$$.get('list.html',{},function (data) {
+            $$('#' + tabPage + '-tab').html(data);
+            switch (tabPage) {
+                case 'list':
+                    infoType = '0';
+                    $$('#lift-list-tab').html('');
+
+                    showListTab();
+                    break;
+                case 'lift-list':
+                    infoType = '1'
+                    $$('#list-tab').html('');
+                    showListTab();
+                    break;
+            }
+        });
+	}
+
+	if(tabPage == 'me'){
+		$$.get('me.html',{},function (data) {
+            $$('#me-tab').html(data);
+            showPersonalInfo();
+        });
+
+	}
+
+	// $$.get(tabPage + '.html', {}, function(data) {
+	// 	$$('#' + tabPage + '-tab').html(data);
+	// 	switch (tabPage) {
+	// 	case 'list':
+	// 		infoType = '0';
+	// 		showListTab('0');
+	// 		break;
+	// 	case 'lift-list':
+	// 		infoType = '1'
+	// 		showListTab();
+	// 		break;
+	// 	case 'me':
+	// 		showPersonalInfo();
+	// 		break;
+	// 	}
+	// });
 });
 
 /**
@@ -254,14 +283,18 @@ function getInfoView(id) {
 			$$('.info-view-header-title').text('('+data.type+')'+data.startpos+'→'+data.destination);
 			$$('.info-view-header-publish-time').text(data.publish_time+'前');
 			$$('.info-view-header-view-count').text(data.read_times+'人');
-			$$('.info-view-content-type').text(data.type+'('+data.car_type+')');
+			$$('.info-view-content-type').text(data.type=='有顺车'?data.type+'('+data.car_type+')':data.type);
 			$$('.info-view-content-start-time').text(data.start_time);
 			$$('.info-view-content-pos').text(data.startpos+'→'+data.destination);
-			$$('.info-view-content-capacity').text(data.capacity);
+			if (data.type=='有顺车'){
+                $$('.info-view-item-capacity-row').show();
+                $$('.info-view-content-capacity').text(data.capacity);
+			}else {
+				$$('.info-view-item-capacity-row').hide();
+			}
 			$$('.info-view-content-distance').text(data.distance+'公里');
 			$$('.info-view-content-during-time').text(data.time);
-			//TODO
-			$$('.info-view-content-is-gaosu').text('你猜');
+			$$('.info-view-content-is-gaosu').text(data.road_type);
 			$$('.info-view-content-road-toll').text('约'+data.road_toll+'元');
 			$$('.info-view-content-remarks').text(data.remarks);
 			$$('.info-view-content-more-text').text(data.startpos+'到'+data.destination);
@@ -304,6 +337,7 @@ function infoFormat(data) {
 		default:
 			data.car_type = '未知车型';
 	}
+	data.road_type = data.road_type == '0'?'不走高速':'走高速';
 	return data;
 }
 
