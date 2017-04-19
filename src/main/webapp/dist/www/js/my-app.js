@@ -36,10 +36,12 @@ $$('.tab-link').on('click', function(e) {
 		$$('#' + tabPage + '-tab').html(data);
 		switch (tabPage) {
 		case 'list':
+			infoType = '0';
 			showListTab('0');
 			break;
 		case 'lift-list':
-			
+			infoType = '1'
+			showListTab();
 			break;
 		case 'me':
 			showPersonalInfo();
@@ -391,8 +393,7 @@ function appendInfoList(data) {
 /**
  * 显示list.html
  */
-function showListTab(type) {
-    infoType = type;
+function showListTab() {
     orderType = '1';
     currentPage = '1';
 	$$('.subnavbar').show();
