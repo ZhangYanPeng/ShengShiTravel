@@ -78,12 +78,13 @@ public class InformationController {
 	
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public @ResponseBody PageResults<Information> search_information(@RequestBody Map map){
+		System.out.println(map);
 		int type = Integer.valueOf((String)map.get("type"));
 		Information information = new Information();
 		information.setStartpos((String)map.get("start_pos"));
 		information.setDestination((String)map.get("destination"));
-		int order = Integer.valueOf((Integer)map.get("order"));
-		int pageNo = Integer.valueOf((Integer) map.get("pageNo"));
+		int order = Integer.valueOf((String)map.get("order"));
+		int pageNo = Integer.valueOf((String) map.get("page"));
 		return informationService.search(information, type, pageNo);
 	}
 	

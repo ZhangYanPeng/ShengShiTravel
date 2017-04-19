@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!--
+<head>
+<!--
         Customize this policy to fit your own app's needs. For more guidance, see:
             https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
         Some notes:
@@ -11,270 +11,311 @@
                 * Enable inline JS: add 'unsafe-inline' to default-src
         -->
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>My App</title>
-    <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="css/framework7.ios.min.css">
-    <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
-    <!-- Path to your custom app styles-->
-    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/my-app.css">
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>My App</title>
+<!-- Path to Framework7 Library CSS-->
+<link rel="stylesheet" href="css/framework7.ios.min.css">
+<link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+<!-- Path to your custom app styles-->
+<link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/my-app.css">
 
 
-  </head>
-  <body>
-    <!-- Status bar overlay for fullscreen mode-->
-    <div class="statusbar-overlay"></div>
-    <!-- Panels overlay-->
-    <div class="panel-overlay"></div>
-    <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
-      <div class="content-block">
-        <p>Left panel content goes here</p>
-      </div>
-    </div>
-    <!-- Right panel with cover effect-->
-    <div class="panel panel-right panel-cover">
-      <div class="content-block">
-        <p>Right panel content goes here</p>
-      </div>
-    </div>
-    <!-- Views-->
-    <div class="views">
-      <!-- Your main view, should have "view-main" class-->
-      <div class="view view-main">
-        <div class="navbar">
-          <div class="navbar-inner">
-            <!-- Sub navbar -->
-            <div class="subnavbar">
-
-                <div class="left sort-bar" style="transform: none;-webkit-transform: none;"><a class="sort-publish-time">发布时间</a> <i class="fa fa-sort-up"></i></div>
-                <div class="center sort-bar" style="transform: none;-webkit-transform: none; font-weight: normal;"><a class="sort-start-time">出发时间</a> <i class="fa fa-sort-up"></i></div>
-                <div class="right sort-bar" style="transform: none;-webkit-transform: none;"><a href="javascript:;" class="sort-choose-location"style="color: #3498db;">地点选择</a>
-                  <i class="fa fa-location-arrow"></i></div>
-
-            </div>
-
-          </div>
-        </div>
-        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
-        <div class="pages toolbar-through">
-          <!-- Page, data-page contains page name-->
-          <div data-page="index" class="page with-subnavbar">
-            <!-- Scrollable page content-->
-            <div class="page-content pull-to-refresh-content  infinite-scroll hide-bars-on-scroll">
-              <!-- Default pull to refresh layer-->
-              <div class="pull-to-refresh-layer">
-                <div class="preloader"></div>
-                <div class="pull-to-refresh-arrow"></div>
-              </div>
-
-              <div class="tabs">
-                <div id="list-tab" class="tab active">
-                </div>
-                <div id="lift-list-tab" class="tab">
-                </div>
-                <div id="publish-tab" class="tab">
-                </div>
-                <div id="me-tab" class="tab">
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-        <!-- Bottom Toolbar-->
-        <div class="toolbar tabbar tabbar-labels">
-          <div class="toolbar-inner">
-            <a href="#list-tab" class="tab-link active " id="list">
-              <i class="icon tab-icon-1"></i>
-              <span class="tabbar-label">有顺车</span>
-            </a>
-            <a href="#lift-list-tab" class="tab-link" id="lift-list">
-              <i class="icon tab-icon-2">
-              </i>
-              <span class="tabbar-label">搭顺车</span>
-            </a>
-            <a href="#" class="tab-link" data-popup=".popup-publish" class="open-popup" id="publish">
-              <i class="icon tab-icon-3"></i>
-              <span class="tabbar-label">发布</span>
-            </a>
-            <a href="#me-tab" class="tab-link" id="me">
-              <i class="icon tab-icon-4"></i>
-              <span class="tabbar-label">我</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- 发布信息 -->
-    <div class="popup popup-publish">
-      <div class="content-block-title">发布信息</div>
-      <div class="list-block">
-        <form method="post" id="publish-form" action="">
+</head>
+<body>
+	<!-- Status bar overlay for fullscreen mode-->
+	<div class="statusbar-overlay"></div>
+	<!-- Views-->
+	<div class="views">
+		<!-- Your main view, should have "view-main" class-->
+		<div class="view view-main">
+			<!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+			<div class="pages">
+				<!-- Page, data-page contains page name-->
+				<div data-page="index" class="page with-subnavbar navbar-fixed">
+					<div class="navbar">
+						<div class="navbar-inner">
+							<div class="center sliding">盛世出行</div>
+							<!-- Sub navbar -->
+							<div class="subnavbar">
+								<div class="row">
+									<!-- Each "cell" has col-[widht in percents] class -->
+									<div class="col-33">
+										<div class=" sort-bar">
+											<a class="sort-publish-time">发布时间</a> <i class="fa fa-sort-up"></i>
+										</div>
+									</div>
+									<div class="col-33">
+										<div class=" sort-bar">
+											<a class="sort-start-time">出发时间</a> <i class="fa fa-sort-up"></i>
+										</div>
+									</div>
+									<div class="col-33">
+										<div class=" sort-bar">
+											<a href="#" data-popover=".popover-choose-location"
+											   class="open-popover" style="color: #3498db;">地点选择</a> <i
+												class="fa fa-location-arrow"></i>
+										</div>
+									</div>
+								</div>
 
 
-        <ul>
-          <input type="hidden" name="type" id="type" value="0"/>
-          <!-- Single radio input -->
-          <li>
-            <label class="label-radio item-content">
-              <!-- Checked by default -->
-              <input type="radio" name="category" value="0" id="cYoushunche" checked="checked" class="category ">
-              <div class="item-inner">
-                <div class="item-title">有顺车</div>
-              </div>
-            </label>
-          </li>
-          <!-- Another radio input -->
-          <li>
-            <label class="label-radio item-content">
-              <input type="radio" name="category" id="cDashunche" value="1" class="category ">
-              <div class="item-inner">
-                <div class="item-title">搭顺车</div>
-              </div>
-            </label>
-          </li>
-          <!-- Text inputs -->
-          <li>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">起点</div>
-                <div class="item-input">
-                  <input type="text" placeholder="请输入出发地" name="startpos"
-                         id="startpos">
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">终点</div>
-                <div class="item-input">
-                  <input type="text" placeholder="请输入目的地" name="destination"
-                         id="destination">
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- Date time-->
-          <li>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">出发时间</div>
-                <div class="item-input">
-                  <input type="datetime-local" name="start_time" id="start_time">
-                </div>
-              </div>
-            </div>
-          </li>
-          <li id="form-chexing">
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">车型</div>
-                <div class="item-input">
-                  <select name="chexing">
-                    <option value="0">请选择车型</option>
-                    <option value="1">轿车</option>
-                    <option value="2">越野车SUV</option>
-                    <option value="3">面包车</option>
-                    <option value="4">卡车</option></select>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- Select -->
-          <li id="form-kongzuoshu">
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">座位数</div>
-                <div class="item-input">
-                  <input type="number" placeholder="请输入座位数" name="capacity"
-                         pattern="[0-9]*" id="capacity">
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- Switch (Checkbox) -->
-          <li>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">是否高速</div>
-                <div class="item-input">
-                  <label class="label-switch">
-                    <input type="checkbox" name="road_type">
-                    <div class="checkbox"></div>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">过路费(元)</div>
-                <div class="item-input">
-                  <input type="text" placeholder="请输入过路费" name="road_toll"
-                         id="road_toll">
-                </div>
-              </div>
-            </div>
-          </li>
-          <!-- Textarea -->
-          <li class="align-top">
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">补充说明</div>
-                <div class="item-input">
-                  <textarea id="remarks" name="remarks"></textarea>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">联系人</div>
-                <div class="item-input">
-                  <input type="text" placeholder="请输入联系人姓名" name="contact"
-                         id="contact">
-                </div>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="item-content">
-              <div class="item-inner">
-                <div class="item-title label">手机号</div>
-                <div class="item-input">
-                  <input type="tel" placeholder="请输入联系人手机" name="contact_info"
-                         id="contact_info">
-                </div>
-              </div>
-            </div>
-          </li>
-          <input type="hidden" name="openid" value="asdsad">
-        </ul>
-        </form>
-      </div>
-      <div class="content-block">
-        <div class="row">
-          <div class="col-50"><a href="#" class="button button-big button-fill color-red close-popup">取消</a></div>
-          <div class="col-50"><a href="#" class="button button-big button-fill color-green publish-from-submit">发布</a></div>
-        </div>
-      </div>
 
-    </div>
-    <!-- Path to Framework7 Library JS-->
-    <script type="text/javascript" src="js/framework7.min.js"></script>
-    <!-- Path to your app js-->
-    <script type="text/javascript" src="lib/jquery/jquery.js"></script>
-    <script type="text/javascript" src="lib/json_serialize/json.js"></script>
-    <script type="text/javascript" src="lib/time-util/time-util.js"></script>
-    <script type="text/javascript" src="js/my-app.js"></script>
-  </body>
+							</div>
+						</div>
+					</div>
+					<!-- Scrollable page content-->
+					<div
+						class="page-content pull-to-refresh-content  infinite-scroll hide-bars-on-scroll">
+
+						<!-- Default pull to refresh layer-->
+						<div class="pull-to-refresh-layer">
+							<div class="preloader"></div>
+							<div class="pull-to-refresh-arrow"></div>
+						</div>
+
+						<div class="tabs">
+							<div id="list-tab" class="tab active"></div>
+							<div id="lift-list-tab" class="tab"></div>
+							<div id="publish-tab" class="tab"></div>
+							<div id="me-tab" class="tab"></div>
+						</div>
+
+					</div>
+					<!-- Bottom Toolbar-->
+					<div class="toolbar tabbar tabbar-labels">
+						<div class="toolbar-inner">
+							<a href="#list-tab" class="tab-link active " id="list"> <i
+									class="icon tab-icon-1"></i> <span class="tabbar-label">有顺车</span>
+							</a> <a href="#lift-list-tab" class="tab-link" id="lift-list"> <i
+								class="icon tab-icon-2"> </i> <span class="tabbar-label">搭顺车</span>
+						</a> <a href="#" class="tab-link" data-popup=".popup-publish"
+								class="open-popup" id="publish"> <i class="icon tab-icon-3"></i>
+							<span class="tabbar-label">发布</span>
+						</a> <a href="#me-tab" class="tab-link" id="me"> <i
+								class="icon tab-icon-4"></i> <span class="tabbar-label">我</span>
+						</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!-- 发布信息 -->
+		<div class="popup popup-publish">
+			<div class="content-block-title">发布信息</div>
+			<div class="list-block">
+				<form method="post" id="publish-form" action="">
+					<ul>
+						<input type="hidden" name="type" id="type" value="0" />
+						<!-- Single radio input -->
+						<li><label class="label-radio item-content"> <!-- Checked by default -->
+							<input type="radio" name="category" value="0" id="cYoushunche"
+								   checked="checked" class="category ">
+							<div class="item-inner">
+								<div class="item-title">有顺车</div>
+							</div>
+						</label></li>
+						<!-- Another radio input -->
+						<li><label class="label-radio item-content"> <input
+								type="radio" name="category" id="cDashunche" value="1"
+								class="category ">
+							<div class="item-inner">
+								<div class="item-title">搭顺车</div>
+							</div>
+						</label></li>
+						<!-- Text inputs -->
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">起点</div>
+									<div class="item-input">
+										<input type="text" placeholder="请输入出发地" name="startpos"
+											   id="startpos">
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">终点</div>
+									<div class="item-input">
+										<input type="text" placeholder="请输入目的地" name="destination"
+											   id="destination">
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- Date time-->
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">出发时间</div>
+									<div class="item-input">
+										<input type="datetime-local" name="start_time" id="start_time">
+									</div>
+								</div>
+							</div>
+						</li>
+						<li id="form-chexing">
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">车型</div>
+									<div class="item-input">
+										<select name="chexing">
+											<option value="0">请选择车型</option>
+											<option value="1">轿车</option>
+											<option value="2">越野车SUV</option>
+											<option value="3">面包车</option>
+											<option value="4">卡车</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- Select -->
+						<li id="form-kongzuoshu">
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">座位数</div>
+									<div class="item-input">
+										<input type="number" placeholder="请输入座位数" name="capacity"
+											   pattern="[0-9]*" id="capacity">
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- Switch (Checkbox) -->
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">是否高速</div>
+									<div class="item-input">
+										<label class="label-switch"> <input type="checkbox"
+																			name="road_type">
+											<div class="checkbox"></div>
+										</label>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">过路费(元)</div>
+									<div class="item-input">
+										<input type="text" placeholder="请输入过路费" name="road_toll"
+											   id="road_toll">
+									</div>
+								</div>
+							</div>
+						</li>
+						<!-- Textarea -->
+						<li class="align-top">
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">补充说明</div>
+									<div class="item-input">
+										<textarea id="remarks" name="remarks"></textarea>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">联系人</div>
+									<div class="item-input">
+										<input type="text" placeholder="请输入联系人姓名" name="contact"
+											   id="contact">
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">手机号</div>
+									<div class="item-input">
+										<input type="tel" placeholder="请输入联系人手机" name="contact_info"
+											   id="contact_info">
+									</div>
+								</div>
+							</div>
+						</li>
+						<input type="hidden" name="openid" value="asdsad">
+					</ul>
+				</form>
+			</div>
+			<div class="content-block">
+				<div class="row">
+					<div class="col-50">
+						<a href="#"
+						   class="button button-big button-fill color-red close-popup">取消</a>
+					</div>
+					<div class="col-50">
+						<a href="#"
+						   class="button button-big button-fill color-green publish-from-submit">发布</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<!--起点终点选择-->
+		<div class="popover popover-choose-location">
+			<!-- Popover's angle arrow -->
+			<div class="popover-angle"></div>
+
+			<!-- Popover content -->
+			<div class="popover-inner">
+				<!-- Any HTML content here -->
+				<div class="list-block">
+					<ul>
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">起点</div>
+									<div class="item-input">
+										<input type="text" placeholder="请输入出发地" name="startpos"
+											   class="choose-location-s">
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<div class="item-title label">终点</div>
+									<div class="item-input">
+										<input type="text" placeholder="请输入目的地" name="destination"
+											   class="choose-location-d">
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="content-block">
+					<a href="#"
+					   class="button button-big button-fill color-green choose-location-submit">确定</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Path to Framework7 Library JS-->
+	<script type="text/javascript" src="js/framework7.min.js"></script>
+	<!-- Path to your app js-->
+	<script type="text/javascript" src="lib/jquery/jquery.js"></script>
+	<script type="text/javascript" src="lib/json_serialize/json.js"></script>
+	<script type="text/javascript" src="lib/time-util/time-util.js"></script>
+	<script type="text/javascript" src="js/my-app.js"></script>
+</body>
 </html>
