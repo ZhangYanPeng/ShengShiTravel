@@ -54,7 +54,13 @@ public class InformationController {
 		}
 		information.setStartpos((String) map.get("startpos"));
 		information.setDestination((String) map.get("destination"));
-		information.setRoad_type(Integer.valueOf((String)map.get("road_type")));
+		try {
+			information.setRoad_type((String)map.get("road_type")=="on"?1:0);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+//			e.printStackTrace();
+			information.setRoad_type(0);
+		}
 		//TODO
 		information.setDistance(Double.valueOf((String) map.get("distance")));
 		information.setTime(Double.valueOf((String) map.get("time")));
