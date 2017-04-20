@@ -1,0 +1,170 @@
+<div data-page="my_publishment" class="page">
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="left">
+				<a href="#" class="back link"> <i class="icon icon-back"></i><span>返回</span></a>
+			</div>
+		</div>
+	</div>
+	<div class="page-content">
+		<div class="content-block">
+			<div class="content-block-inner">
+
+				<div class="list-block media-list ">
+
+					<ul class="info-list">
+
+					</ul>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="popup popup-edit">
+		<div class="content-block-title">编辑</div>
+		<div class="list-block">
+			<form method="post" id="edit-form" action="">
+				<ul>
+					<input type="hidden" name="type" id="type" />
+					<!-- Single radio input -->
+					<input type="hidden" name="id" id="id" >
+					<input type="hidden" name="distance" id="distance">
+					<input type="hidden" name="time" id="time">
+					<!-- Text inputs -->
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">起点</div>
+								<div class="item-input">
+									<input type="text" placeholder="请输入出发地" name="startpos"
+										id="startpos">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">终点</div>
+								<div class="item-input">
+									<input type="text" placeholder="请输入目的地" name="destination"
+										id="destination">
+								</div>
+							</div>
+						</div>
+					</li>
+					<!-- Date time-->
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">出发时间</div>
+								<div class="item-input">
+									<input type="datetime-local" name="start_time" id="start_time">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li id="form-chexing">
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">车型</div>
+								<div class="item-input">
+									<select name="chexing" id="car_type">
+										<option value="0">请选择车型</option>
+										<option value="1">轿车</option>
+										<option value="2">越野车SUV</option>
+										<option value="3">面包车</option>
+										<option value="4">卡车</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</li>
+					<!-- Select -->
+					<li id="form-kongzuoshu">
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">座位数</div>
+								<div class="item-input">
+									<input type="number" placeholder="请输入座位数" name="capacity"
+										pattern="[0-9]*" id="capacity">
+								</div>
+							</div>
+						</div>
+					</li>
+					<!-- Switch (Checkbox) -->
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">是否高速</div>
+								<div class="item-input">
+									<label class="label-switch"> <input type="checkbox"
+										name="road_type" id="road_type" >
+										<div class="checkbox"></div>
+									</label>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">过路费(元)</div>
+								<div class="item-input">
+									<input type="text" placeholder="请输入过路费" name="road_toll"
+										id="road_toll">
+								</div>
+							</div>
+						</div>
+					</li>
+					<!-- Textarea -->
+					<li class="align-top">
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">补充说明</div>
+								<div class="item-input">
+									<textarea id="remarks" name="remarks"></textarea>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">联系人</div>
+								<div class="item-input">
+									<input type="text" placeholder="请输入联系人姓名" name="contact"
+										id="contact">
+								</div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+							<div class="item-inner">
+								<div class="item-title label">手机号</div>
+								<div class="item-input">
+									<input type="tel" placeholder="请输入联系人手机" name="contact_info"
+										id="contact_info">
+								</div>
+							</div>
+						</div>
+					</li>
+					<input type="hidden" name="openid" value="asdsad">
+				</ul>
+			</form>
+		</div>
+		<div class="content-block">
+			<div class="row">
+				<div class="col-50">
+					<a href="#"
+						class="button button-big button-fill color-red close-popup">取消</a>
+				</div>
+				<div class="col-50">
+					<a href="#"
+						class="button button-big button-fill color-green edit-form-submit">发布</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

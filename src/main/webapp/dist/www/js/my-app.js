@@ -56,7 +56,27 @@ $$('.tab-link').on('click', function(e) {
 	if(tabPage == 'me'){
 		$$.get('me.html',{},function (data) {
             $$('#me-tab').html(data);
-            showPersonalInfo();
+            $$('.subnavbar').hide();
+        	// personal information load
+        	$$.ajax({
+        		async : false,
+        		cache : false,
+        		type : 'POST',
+        		crossDomain : true,
+        		dataType : 'json',
+        		data : {
+        			'openid' : openid,
+        		},
+        		url : baseUrl+"/customer/view",
+        		error : function(data) {// 请求失败处理函数
+        			alert("获取数据失败！");
+        		},
+        		success : function(data) {
+        			var info = data;
+        			$$("#me_headimg").attr("src", info.headimgurl);
+        			$$("#me_nickname").html(info.nickname);
+        		}
+        	});
         });
 
 	}
@@ -84,10 +104,14 @@ $$('.tab-link').on('click', function(e) {
  */
 $$(document).on('pageInit', function (e) {
     var page = e.detail.page;
-    // console.log(page);
+    console.log(page.name);
     if(page.name == 'info-view'){
 		getInfoView(page.query.information_id);
 	}
+    
+    if(page.name == 'personal' ){
+    	showPersonalInfo();
+    }
     
     if(page.name == 'personal_edit' ){
     	// personal information load
@@ -100,7 +124,7 @@ $$(document).on('pageInit', function (e) {
     		data : {
     			'openid' : openid,
     		},
-    		url : "http://localhost:8080/travel/customer/view",
+    		url : baseUrl+"/customer/view",
     		error : function(data) {// 请求失败处理函数
     			alert("获取数据失败！");
     		},
@@ -136,7 +160,97 @@ $$(document).on('pageInit', function (e) {
     		}
     	});
 	}
+    
+    if(page.name =='my_publishment'){
+
+    	$$.ajax({
+    		url : baseUrl+"customer/get_publishment",
+    		crossDomain : true,
+    		async : false,
+    		method : 'POST',
+    		contentType : 'application/json',
+    		data : JSON.stringify({"openid" : openid}),
+    		dataType : 'json',
+    		success : function(data) {
+    			$$.each(data, function(i, info) {
+    				// console.log(info);
+    				var preHtml = "<li><a onclick='edit("+info.id+")'>"
+    						+ "<div class='item-link item-content'>"
+    						+ "<div class='item-media avatar'>"
+    						+ "<img  src='./img/0.jpg'>"
+    						+ "</div>"
+    						+ "<div class='item-inner'>"
+    						+ "<div class='item-title-row'>"
+    						+ "<div class='item-title' style='color: #1a1a1a'>START_POS→DESTINATION</div>"
+    						+ "<div class='item-after publish-time'>PUBLISH_TIME前发布</div>"
+    						+ "</div>"
+    						+ "<div class='item-subtitle start-time'>出发日期：STARAT_TIME</div>"
+    						+ "<div class='item-text'>"
+    						+ "<span class='category-type'>CATEGORY</span><span class='contact'>CONTACT</span>"
+    						+ "</div>" + "</div>" + "</div>" + "</a></li>";
+    				preHtml = preHtml.replace('START_POS', info.startpos)
+    						.replace('DESTINATION', info.destination)
+    						.replace('PUBLISH_TIME',
+    								parsePublishTime(info.publish_time))
+    						.replace(
+    								'STARAT_TIME',
+    								getFormatDateByLong(info.start_time,
+    										'MM月dd日hh:mm')).replace(
+    								'category-type',
+    								info.type == 0 ? 'category-youshunche'
+    										: 'category-dashunche')
+    						.replace('CATEGORY',
+    								info.type == 0 ? '有顺车' : '搭顺车')
+    						.replace(
+    								'CONTACT',
+    								info.type == 0 ? info.contact + '(车主)'
+    										: info.contact + '(乘客)');
+    				$$('.info-list').append($$(preHtml));
+    			});
+    		},
+    		error : function(data) {
+
+    		}
+
+    	});
+    }
 });
+function edit(id){
+	var url = baseUrl + 'information/get_information';
+    $$.ajax({
+        url : url,
+        crossDomain : true,
+        async : false,
+        method : 'POST',
+        data : {
+        	information_id:id
+		},
+        dataType : 'json',
+        error : function(data){
+        	
+        },
+        success : function(data) {
+        	$$("#id").val(data.id);
+        	$$("#type").val(data.type);
+        	$$("#startpos").val(data.startpos);
+        	$$("#startpos").val(data.startpos);
+        	$$("#destination").val(data.destination);
+        	$$("#start_time").val(data.start_time);
+        	$$("#car_type").val(data.car_type);
+        	$$("#capacity").val(data.capacity);
+        	if(data.road_type==1){
+        		$$("#road_type").attr('checked','checked')
+        	}else{
+        		$$("#road_type").removeAttr('checked');
+        	}
+        	$$("#road_toll").val(data.road_toll);
+        	$$("#remarks").val(data.remarks);
+        	$$("#contact").val(data.contact);
+        	$$("#contact_info").val(data.contact_info);
+        }
+	});
+	myApp.popup('.popup-edit');
+}
 // publish popup form change
 $$('.category').on('change', function(e) {
 	var target = $$(e.target);
@@ -194,6 +308,32 @@ $$(document).on('click',function(e) {
 	// 发布信息
 	if ($$(target).hasClass('publish-from-submit')) {
 		publishInfoSubmit();
+	}
+	
+	if($$(target).hasClass('edit-form-submit')){
+		var data = $('#edit-form').serializeObject();
+		// console.log(data);
+		var url = baseUrl + 'information/publish';
+		$$.ajax({
+			url : url,
+			crossDomain : true,
+			async : false,
+			method : 'POST',
+			contentType : 'application/json',
+			data : JSON.stringify(data),
+			dataType : 'json',
+			success : function(data) {
+				if (data == 1) {
+					location.href = baseUrl + 'wx/index.html';
+				} else {
+
+				}
+			},
+			error : function(data) {
+
+			}
+
+		});
 	}
 
 	// 按发布时间排序

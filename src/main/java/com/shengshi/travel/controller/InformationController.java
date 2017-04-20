@@ -32,6 +32,7 @@ public class InformationController {
 	
 	@RequestMapping(value = "/publish", method = RequestMethod.POST)
 	public @ResponseBody int publish(@RequestBody Map map){
+		System.out.println(map);
 		Information information = new Information();
 		information.setId(Long.valueOf((String)map.get("id")));
 		if( Integer.valueOf((String) map.get("type")) == 0 ){
