@@ -174,8 +174,8 @@ $$(document).on('pageInit', function (e) {
     		success : function(data) {
     			$$.each(data, function(i, info) {
     				// console.log(info);
-    				var preHtml = "<li><a onclick='edit("+info.id+")'>"
-    						+ "<div class='item-link item-content'>"
+    				var preHtml = "<li class='swipeout'><a onclick='edit("+info.id+")'>"
+    						+ "<div class='swipeout-content item-link item-content'>"
     						+ "<div class='item-media avatar'>"
     						+ "<img  src='./img/0.jpg'>"
     						+ "</div>"
@@ -187,7 +187,12 @@ $$(document).on('pageInit', function (e) {
     						+ "<div class='item-subtitle start-time'>出发日期：STARAT_TIME</div>"
     						+ "<div class='item-text'>"
     						+ "<span class='category-type'>CATEGORY</span><span class='contact'>CONTACT</span>"
-    						+ "</div>" + "</div>" + "</div>" + "</a></li>";
+    						+ "</div>" + "</div>" + "</div>" + "</a>"
+						+"<div class='swipeout-actions-right'>"
+							+"<a class='action-delete' style='background: rgba(255, 0, 0, 0.68);' href='#' data-id='"+info.id+"'>删除</a>"
+                        +"</div> "
+						+"</li>";
+
     				preHtml = preHtml.replace('START_POS', info.startpos)
     						.replace('DESTINATION', info.destination)
     						.replace('PUBLISH_TIME',
@@ -215,6 +220,10 @@ $$(document).on('pageInit', function (e) {
     	});
     }
 });
+/**
+ * 获得发布信息（修改页）
+ * @param id
+ */
 function edit(id){
 	var url = baseUrl + 'information/get_information';
     $$.ajax({
@@ -235,7 +244,7 @@ function edit(id){
         	$$("#startpos").val(data.startpos);
         	$$("#startpos").val(data.startpos);
         	$$("#destination").val(data.destination);
-        	$$("#start_time").val(data.start_time);
+        	$$("#start_time").val(getFormatDateByLong(data.start_time,'yyyy-MM-ddThh:mm'));
         	$$("#car_type").val(data.car_type);
         	$$("#capacity").val(data.capacity);
         	if(data.road_type==1){
@@ -309,7 +318,8 @@ $$(document).on('click',function(e) {
 	if ($$(target).hasClass('publish-from-submit')) {
 		publishInfoSubmit();
 	}
-	
+
+	//提交修改的发布信息
 	if($$(target).hasClass('edit-form-submit')){
 		var data = $('#edit-form').serializeObject();
 		// console.log(data);
@@ -335,6 +345,11 @@ $$(document).on('click',function(e) {
 
 		});
 	}
+
+	//删除发布的信息
+    if ($$(target).hasClass('action-delete')) {
+			deleteInfo(target);
+    }
 
 	// 按发布时间排序
 	if ($$(target).hasClass('sort-publish-time')) {
@@ -401,6 +416,35 @@ $$(document).on('click',function(e) {
 		});
 	}
 });
+
+/**
+ * 删除发布的信息
+ * @param id
+ */
+function deleteInfo(target) {
+	var url = baseUrl + 'information/delete';
+	// console.log($$(target));
+    $$(target).parent().parent().remove();
+	// $$.ajax({
+     //    url : url,
+     //    crossDomain : true,
+     //    async : false,
+     //    method : 'POST',
+     //    data : {
+     //        id:$$(target).prop('data-id')
+     //    },
+     //    dataType : 'json',
+	// 	success:function (data) {
+	// 		//删除成功
+     //    	if (true){
+	// 			$$(target).parent().remove();
+	// 		}
+     //    },
+	// 	error:function (data) {
+	//
+     //    }
+	// });
+}
 
 /**
  * 获取详细信息
