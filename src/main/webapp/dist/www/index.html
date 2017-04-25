@@ -27,7 +27,7 @@
 <!-- Path to your custom app styles-->
 <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/my-app.css">
-
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=zTCt5zQIdGF6Ky5ub7n8ufVCFSAekiYx"></script>
 
 </head>
 <body>
@@ -120,6 +120,7 @@
 						<input type="hidden" name="id" id="id" value="-1">
 						<input type="hidden" name="distance" id="distance">
 						<input type="hidden" name="time" id="time">
+						<div hidden="hidden" id="map"></div>
 						<li><label class="label-radio item-content"> <!-- Checked by default -->
 							<input type="radio" name="category" value="0" id="cYoushunche"
 								   checked="checked" class="category ">
@@ -255,7 +256,7 @@
 								</div>
 							</div>
 						</li>
-						<input type="hidden" name="openid" value="asdsad">
+						<input type="hidden" name="openid" id="openid">
 					</ul>
 				</form>
 			</div>

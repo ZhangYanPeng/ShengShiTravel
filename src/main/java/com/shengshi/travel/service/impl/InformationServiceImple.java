@@ -51,18 +51,10 @@ public class InformationServiceImple implements InformationService {
 	@Transactional
 	public PageResults<Information> search(Information information, int order, int pageNo) {
 		// TODO Auto-generated method stub
-		String hql = "from Information information where information.type=?";
-		String countHql = "select count(*) from Information information where information.type=?";
-		if(information.getId()!=-1){
-			if( information.getStartpos()!=null && !information.getStartpos().equals("")){
-				hql += " and information.startpos=?";
-				countHql += " and information.startpos=?";
-			}
-			if( information.getDestination()!=null && !information.getDestination().equals("")){
-				hql += " and information.destination=?";
-				countHql += " and information.destination=?";
-			}
-		}
+		String hql = "from Information information where information.type=? and start_time>=? ";
+		String countHql = "select count(*) from Information information where information.type=? and start_time>=? ";
+		hql += " and information.startpos like ? and information.destination like ?";
+		countHql += " and information.startpos like ? and information.destination like ?";
 		if(order==Constants.order_by_publish_time_asc){
 			hql += " order by information.publish_time asc";
 		}
@@ -75,7 +67,15 @@ public class InformationServiceImple implements InformationService {
 		else{
 			hql += " order by information.start_time desc";
 		}
-		Object[] values = {information.getType()};
+		Object[] values = new Object[]{information.getType(),System.currentTimeMillis(),"%%","%%"};
+		if(information.getId()!=-1){
+			if( information.getStartpos()!=null && !information.getStartpos().equals("")){
+				values[2] = "%"+information.getStartpos()+"%";
+			}
+			if( information.getDestination()!=null && !information.getDestination().equals("")){
+				values[3] = "%"+information.getDestination()+"%";
+			}
+		}
 		return informationDAO.findPageByFetchedHql(hql, countHql, pageNo, Constants.pageSize, values);
 	}
 
@@ -87,6 +87,15 @@ public class InformationServiceImple implements InformationService {
 		information.setRead_times(information.getRead_times()+1);
 		informationDAO.update(information);
 		return information;
+	}
+
+	@Override
+	@Transactional
+	public String delete(Long information_id) {
+		// TODO Auto-generated method stub
+		Information information = informationDAO.get(information_id);
+		informationDAO.delete(information);
+		return "1";
 	}
 
 }
