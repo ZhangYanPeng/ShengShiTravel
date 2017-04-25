@@ -22,14 +22,16 @@
 	</div>
 	<div class="popup popup-edit">
 		<div class="content-block-title">编辑</div>
+		<div hidden="hidden" id="mapt"> </div>
 		<div class="list-block">
 			<form method="post" id="edit-form" action="">
+				<input type="hidden" name="type" id="type_e" />
+				<!-- Single radio input -->
+				<input type="hidden" name="id" id="id_e">
+				<input type="hidden" name="distance" id="distance_e">
+				<input type="hidden" name="time" id="time_e">
+				<input type="hidden" name="openid" id="openid_e">
 				<ul>
-					<input type="hidden" name="type" id="type" />
-					<!-- Single radio input -->
-					<input type="hidden" name="id" id="id" >
-					<input type="hidden" name="distance" id="distance">
-					<input type="hidden" name="time" id="time">
 					<!-- Text inputs -->
 					<li>
 						<div class="item-content">
@@ -37,7 +39,7 @@
 								<div class="item-title label">起点</div>
 								<div class="item-input">
 									<input type="text" placeholder="请输入出发地" name="startpos"
-										id="startpos">
+										id="startpos_e">
 								</div>
 							</div>
 						</div>
@@ -48,7 +50,7 @@
 								<div class="item-title label">终点</div>
 								<div class="item-input">
 									<input type="text" placeholder="请输入目的地" name="destination"
-										id="destination">
+										id="destination_e">
 								</div>
 							</div>
 						</div>
@@ -59,17 +61,17 @@
 							<div class="item-inner">
 								<div class="item-title label">出发时间</div>
 								<div class="item-input">
-									<input type="datetime-local" name="start_time" id="start_time">
+									<input type="datetime-local" name="start_time" id="start_time_e">
 								</div>
 							</div>
 						</div>
 					</li>
-					<li id="form-chexing">
+					<li id="form-chexing_e">
 						<div class="item-content">
 							<div class="item-inner">
 								<div class="item-title label">车型</div>
 								<div class="item-input">
-									<select name="chexing" id="car_type">
+									<select name="chexing" id="car_type_e">
 										<option value="0">请选择车型</option>
 										<option value="1">轿车</option>
 										<option value="2">越野车SUV</option>
@@ -87,7 +89,7 @@
 								<div class="item-title label">座位数</div>
 								<div class="item-input">
 									<input type="number" placeholder="请输入座位数" name="capacity"
-										pattern="[0-9]*" id="capacity">
+										pattern="[0-9]*" id="capacity_e">
 								</div>
 							</div>
 						</div>
@@ -99,7 +101,7 @@
 								<div class="item-title label">是否高速</div>
 								<div class="item-input">
 									<label class="label-switch"> <input type="checkbox"
-										name="road_type" id="road_type" >
+										name="road_type" id="road_type_e">
 										<div class="checkbox"></div>
 									</label>
 								</div>
@@ -112,7 +114,7 @@
 								<div class="item-title label">过路费(元)</div>
 								<div class="item-input">
 									<input type="text" placeholder="请输入过路费" name="road_toll"
-										id="road_toll">
+										id="road_toll_e">
 								</div>
 							</div>
 						</div>
@@ -123,7 +125,7 @@
 							<div class="item-inner">
 								<div class="item-title label">补充说明</div>
 								<div class="item-input">
-									<textarea id="remarks" name="remarks"></textarea>
+									<textarea id="remarks_e" name="remarks"></textarea>
 								</div>
 							</div>
 						</div>
@@ -134,7 +136,7 @@
 								<div class="item-title label">联系人</div>
 								<div class="item-input">
 									<input type="text" placeholder="请输入联系人姓名" name="contact"
-										id="contact">
+										id="contact_e">
 								</div>
 							</div>
 						</div>
@@ -145,12 +147,11 @@
 								<div class="item-title label">手机号</div>
 								<div class="item-input">
 									<input type="tel" placeholder="请输入联系人手机" name="contact_info"
-										id="contact_info">
+										id="contact_info_e">
 								</div>
 							</div>
 						</div>
 					</li>
-					<input type="hidden" name="openid" value="asdsad">
 				</ul>
 			</form>
 		</div>

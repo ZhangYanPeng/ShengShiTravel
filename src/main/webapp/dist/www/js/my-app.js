@@ -31,6 +31,7 @@ $$('.tab-link').on('click', function(e) {
 	console.log(tabPage);
 	if (tabPage == 'publish') {
 		myApp.popup('.popup-publish');
+		$$("#openid").val(openid);
 		return;
 	}
 
@@ -106,6 +107,7 @@ $$(document).on('pageInit', function (e) {
     var page = e.detail.page;
     console.log(page.name);
     if(page.name == 'info-view'){
+    	
 		getInfoView(page.query.information_id);
 	}
     
@@ -161,10 +163,14 @@ $$(document).on('pageInit', function (e) {
     	});
 	}
     
-    if(page.name =='my_publishment'){
-
+    if(page.name =='my_publishment' || page.name =='my_focus'){
+    	var url = baseUrl+"customer/";
+    	if (page.name =='my_publishment')
+    		url = url + "get_publishment";
+    	else
+    		url = url + "get_focus";
     	$$.ajax({
-    		url : baseUrl+"customer/get_publishment",
+    		url : url,
     		crossDomain : true,
     		async : false,
     		method : 'POST',
@@ -174,25 +180,46 @@ $$(document).on('pageInit', function (e) {
     		success : function(data) {
     			$$.each(data, function(i, info) {
     				// console.log(info);
-    				var preHtml = "<li class='swipeout'><a onclick='edit("+info.id+")'>"
-    						+ "<div class='swipeout-content item-link item-content'>"
-    						+ "<div class='item-media avatar'>"
-    						+ "<img  src='./img/0.jpg'>"
-    						+ "</div>"
-    						+ "<div class='item-inner'>"
-    						+ "<div class='item-title-row'>"
-    						+ "<div class='item-title' style='color: #1a1a1a'>START_POS→DESTINATION</div>"
-    						+ "<div class='item-after publish-time'>PUBLISH_TIME前发布</div>"
-    						+ "</div>"
-    						+ "<div class='item-subtitle start-time'>出发日期：STARAT_TIME</div>"
-    						+ "<div class='item-text'>"
-    						+ "<span class='category-type'>CATEGORY</span><span class='contact'>CONTACT</span>"
-    						+ "</div>" + "</div>" + "</div>" + "</a>"
-						+"<div class='swipeout-actions-right'>"
-							+"<a class='action-delete' style='background: rgba(255, 0, 0, 0.68);' href='#' data-id='"+info.id+"'>删除</a>"
-                        +"</div> "
-						+"</li>";
-
+    				if (page.name =='my_publishment'){
+    		    		var preHtml = "<li class='swipeout'><a onclick='edit("+info.id+")'>"
+    					+ "<div class='swipeout-content item-link item-content'>"
+    					+ "<div class='item-media avatar'>"
+    					+ "<img  src='./img/0.jpg'>"
+    					+ "</div>"
+    					+ "<div class='item-inner'>"
+    					+ "<div class='item-title-row'>"
+    					+ "<div class='item-title' style='color: #1a1a1a'>START_POS→DESTINATION</div>"
+    					+ "<div class='item-after publish-time'>PUBLISH_TIME前发布</div>"
+    					+ "</div>"
+    					+ "<div class='item-subtitle start-time'>出发日期：STARAT_TIME</div>"
+    					+ "<div class='item-text'>"
+    					+ "<span class='category-type'>CATEGORY</span><span class='contact'>CONTACT</span>"
+    					+ "</div>" + "</div>" + "</div>" + "</a>"
+    					+"<div class='swipeout-actions-right'>"
+    						+"<a class='action-delete' style='background: rgba(255, 0, 0, 0.68);' href='#' data-id='"+info.id+"'>删除</a>"
+    			        +"</div> "
+    					+"</li>";
+    		    	}
+    		    	else{
+    		    		var preHtml = "<li class='swipeout'><a href='info-view.html?information_id="+info.id+"'>"
+    					+ "<div class='swipeout-content item-link item-content'>"
+    					+ "<div class='item-media avatar'>"
+    					+ "<img  src='./img/0.jpg'>"
+    					+ "</div>"
+    					+ "<div class='item-inner'>"
+    					+ "<div class='item-title-row'>"
+    					+ "<div class='item-title' style='color: #1a1a1a'>START_POS→DESTINATION</div>"
+    					+ "<div class='item-after publish-time'>PUBLISH_TIME前发布</div>"
+    					+ "</div>"
+    					+ "<div class='item-subtitle start-time'>出发日期：STARAT_TIME</div>"
+    					+ "<div class='item-text'>"
+    					+ "<span class='category-type'>CATEGORY</span><span class='contact'>CONTACT</span>"
+    					+ "</div>" + "</div>" + "</div>" + "</a>"
+    					+"<div class='swipeout-actions-right'>"
+    						+"<a class='action-unfocus' style='background: rgba(255, 0, 0, 0.68);' href='#' data-id='"+info.id+"'>删除</a>"
+    			        +"</div> "
+    					+"</li>";
+    		    	}
     				preHtml = preHtml.replace('START_POS', info.startpos)
     						.replace('DESTINATION', info.destination)
     						.replace('PUBLISH_TIME',
@@ -214,9 +241,7 @@ $$(document).on('pageInit', function (e) {
     			});
     		},
     		error : function(data) {
-
     		}
-
     	});
     }
 });
@@ -239,26 +264,26 @@ function edit(id){
         	
         },
         success : function(data) {
-        	$$("#id").val(data.id);
-        	$$("#type").val(data.type);
-        	$$("#startpos").val(data.startpos);
-        	$$("#startpos").val(data.startpos);
-        	$$("#destination").val(data.destination);
-        	$$("#start_time").val(getFormatDateByLong(data.start_time,'yyyy-MM-ddThh:mm'));
-        	$$("#car_type").val(data.car_type);
-        	$$("#capacity").val(data.capacity);
+        	$$("#id_e").val(data.id);
+        	$$("#type_e").val(data.type);
+        	$$("#startpos_e").val(data.startpos);
+        	$$("#destination_e").val(data.destination);
+        	$$("#start_time_e").val(getFormatDateByLong(data.start_time,'yyyy-MM-ddThh:mm'));
+        	$$("#car_type_e").val(data.car_type);
+        	$$("#capacity_e").val(data.capacity);
         	if(data.road_type==1){
-        		$$("#road_type").attr('checked','checked')
+        		$$("#road_type_e").attr('checked','checked')
         	}else{
-        		$$("#road_type").removeAttr('checked');
+        		$$("#road_type_e").removeAttr('checked');
         	}
-        	$$("#road_toll").val(data.road_toll);
-        	$$("#remarks").val(data.remarks);
-        	$$("#contact").val(data.contact);
-        	$$("#contact_info").val(data.contact_info);
+        	$$("#road_toll_e").val(data.road_toll);
+        	$$("#remarks_e").val(data.remarks);
+        	$$("#contact_e").val(data.contact);
+        	$$("#contact_info_e").val(data.contact_info);
+        	$$("#openid_e").val(openid);
+        	myApp.popup('.popup-edit');
         }
 	});
-	myApp.popup('.popup-edit');
 }
 // publish popup form change
 $$('.category').on('change', function(e) {
@@ -318,37 +343,99 @@ $$(document).on('click',function(e) {
 	if ($$(target).hasClass('publish-from-submit')) {
 		publishInfoSubmit();
 	}
-
-	//提交修改的发布信息
-	if($$(target).hasClass('edit-form-submit')){
-		var data = $('#edit-form').serializeObject();
-		// console.log(data);
-		var url = baseUrl + 'information/publish';
+	
+	if ($$(target).hasClass('info-view-header-mark')) {
+		var url = baseUrl + 'information/focus';
 		$$.ajax({
 			url : url,
 			crossDomain : true,
 			async : false,
 			method : 'POST',
 			contentType : 'application/json',
-			data : JSON.stringify(data),
+			data : JSON.stringify({
+				"openid" : openid,
+				"type" : "1",
+				"information_id" : $$('.info-view-header').attr('data-id')
+			}),
 			dataType : 'json',
 			success : function(data) {
-				if (data == 1) {
-					location.href = baseUrl + 'wx/index.html';
-				} else {
-
-				}
+				console.log(data);
+				if( data == 1)
+					myApp.alert('收藏成功','');
+				else if( data==0 )
+					myApp.alert('收藏失败，请重试','');
+				else if( data==-1 )
+					myApp.alert('不能收藏自己发布的信息','');
 			},
-			error : function(data) {
-
-			}
-
 		});
+	}
+
+	//提交修改的发布信息
+	if($$(target).hasClass('edit-form-submit')){
+		var map = new BMap.Map("mapt");
+		var searchComplete = function (results){
+			if (transit.getStatus() != BMAP_STATUS_SUCCESS){
+				console.log(transit.toString());
+				return ;
+			}
+			var plan = results.getPlan(0);
+			$$("#time_e").val(plan.getDuration(true) );               //获取时间
+			$$("#distance_e").val(plan.getDistance(true) );             //获取距离
+			$$("#openid_e").val(openid);
+			var data = $('#edit-form').serializeObject();
+			console.log(data);
+			var url = baseUrl + 'information/publish';
+			$$.ajax({
+				url : url,
+				crossDomain : true,
+				async : false,
+				method : 'POST',
+				contentType : 'application/json',
+				data : JSON.stringify(data),
+				dataType : 'json',
+				success : function(data) {
+					if (data == 1) {
+						location.href = baseUrl + 'wx/index.html';
+					} else {
+						alert("发布失败，请检查信息是否填写有误");
+					}
+				},
+				error : function(data) {
+					alert("发布失败，请检查信息是否填写有误");
+				}
+			});
+		}
+		var transit = new BMap.DrivingRoute(map, {renderOptions: {map: map},
+			onSearchComplete: searchComplete,
+			onPolylinesSet: function(){        
+				setTimeout(function(){alert(output)},"1000");
+		}});
+		transit.search($$("#startpos_e").val(), $$("#destination_e").val());
 	}
 
 	//删除发布的信息
     if ($$(target).hasClass('action-delete')) {
 			deleteInfo(target);
+    }
+    
+    if ($$(target).hasClass('action-unfocus')) {
+    	var url = baseUrl + 'information/focus';
+		$$.ajax({
+			url : url,
+			crossDomain : true,
+			async : false,
+			method : 'POST',
+			contentType : 'application/json',
+			data : JSON.stringify({
+				"openid" : openid,
+				"type" : "2",
+				"information_id" : $$(target).attr('data-id')
+			}),
+			dataType : 'json',
+			success : function(data) {
+				$$(target).parent().parent().remove();
+			},
+		});
     }
 
 	// 按发布时间排序
@@ -424,34 +511,34 @@ $$(document).on('click',function(e) {
 function deleteInfo(target) {
 	var url = baseUrl + 'information/delete';
 	// console.log($$(target));
-    $$(target).parent().parent().remove();
-	// $$.ajax({
-     //    url : url,
-     //    crossDomain : true,
-     //    async : false,
-     //    method : 'POST',
-     //    data : {
-     //        id:$$(target).prop('data-id')
-     //    },
-     //    dataType : 'json',
-	// 	success:function (data) {
-	// 		//删除成功
-     //    	if (true){
-	// 			$$(target).parent().remove();
-	// 		}
-     //    },
-	// 	error:function (data) {
-	//
-     //    }
-	// });
+	$$.ajax({
+		url : url,
+		crossDomain : true,
+		async : false,
+		method : 'POST',
+		data : {
+			"information_id" : $$(target).attr('data-id')
+		},
+		dataType : 'json',
+		success : function(data) {
+			// 删除成功
+			console.log('56456747');
+		    $$(target).parent().parent().remove();
+		},
+		error : function(data) {
+			console.log(data);
+		}
+	});
 }
 
 /**
  * 获取详细信息
+ * 
  * @param id
  */
 function getInfoView(id) {
 	var url = baseUrl + 'information/read';
+	$$('.info-view-header').attr('data-id',id);
     $$.ajax({
         url : url,
         crossDomain : true,
@@ -531,29 +618,44 @@ function infoFormat(data) {
  * @returns
  */
 function publishInfoSubmit() {
-	var data = $('#publish-form').serializeObject();
-	// console.log(data);
-	var url = baseUrl + 'information/publish';
-	$$.ajax({
-		url : url,
-		crossDomain : true,
-		async : false,
-		method : 'POST',
-		contentType : 'application/json',
-		data : JSON.stringify(data),
-		dataType : 'json',
-		success : function(data) {
-			if (data == 1) {
-				location.href = baseUrl + 'wx/index.html';
-			} else {
-
-			}
-		},
-		error : function(data) {
-
+	var map = new BMap.Map("map");
+	var searchComplete = function (results){
+		if (transit.getStatus() != BMAP_STATUS_SUCCESS){
+			return ;
 		}
+		var plan = results.getPlan(0);
+		$$("#time").val(plan.getDuration(true) );               //获取时间
+		$$("#distance").val(plan.getDistance(true) );             //获取距离
+		var data = $('#publish-form').serializeObject();
+		//console.log(data);
+		var url = baseUrl + 'information/publish';
+		$$.ajax({
+			url : url,
+			crossDomain : true,
+			async : false,
+			method : 'POST',
+			contentType : 'application/json',
+			data : JSON.stringify(data),
+			dataType : 'json',
+			success : function(data) {
+				if (data == 1) {
+					location.href = baseUrl + 'wx/index.html';
+				} else {
+					alert("发布失败，请检查信息是否填写有误");
+				}
+			},
+			error : function(data) {
+				alert("发布失败，请检查信息是否填写有误");
+			}
 
-	});
+		});
+	}
+	var transit = new BMap.DrivingRoute(map, {renderOptions: {map: map},
+		onSearchComplete: searchComplete,
+		onPolylinesSet: function(){        
+			setTimeout(function(){alert(output)},"1000");
+	}});
+	transit.search($$("#startpos").val(), $$("#destination").val());
 }
 
 // Loading flag

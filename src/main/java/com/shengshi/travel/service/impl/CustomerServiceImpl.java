@@ -44,7 +44,15 @@ public class CustomerServiceImpl implements CustomerService {
 	@Transactional
 	public int focus(Customer customer, Information information, int type) {
 		// TODO Auto-generated method stub
-		String focus = "";
+		if( information == null )
+			return 0;
+		List iList = customer.getInformations();
+		for( Object obj : iList){
+			Information info = (Information) obj;
+			if( info.getId() == information.getId() )
+				return -1;
+		}
+		String focus = customer.getFocus();;
 		if(type == Constants.add_focus){
 			String[] strs = focus.split("@");
 			int check =0;
@@ -58,9 +66,10 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		else{
 			String[] strs = focus.split("@");
+			focus = "";
 			for( String str: strs){
-				if( !str.equals(""+information.getId())){
-					focus += "@" + information.getId();
+				if( !str.equals(""+information.getId()) && !str.equals("")){
+					focus += "@" + str;
 				}
 			}
 		}
@@ -92,9 +101,22 @@ public class CustomerServiceImpl implements CustomerService {
 		if(customer.getFocus()==null)
 			return new ArrayList();
 		String[] focus = customer.getFocus().split("@");
+		String new_focus = "";
 		for( String str: focus){
-			list.add(imformationDAO.get(Long.valueOf(str)));
+			if(!str.equals("")){
+				try{
+					Information info = imformationDAO.get(Long.valueOf(str));
+					if(info!=null){
+						list.add(info);
+						new_focus += "@" + str;
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
 		}
+		customer.setFocus(new_focus);
+		customerDAO.update(customer);
 		return list;
 	}
 
@@ -112,9 +134,9 @@ public class CustomerServiceImpl implements CustomerService {
 		information.setCustomer(customer);
 		customerDAO.update(customer);
 		if(information.getId()==-1)
-			imformationDAO.update(information);
-		else
 			imformationDAO.save(information);
+		else
+			imformationDAO.update(information);
 		return 1;
 	}
 

@@ -30,8 +30,8 @@ public class Information {
 	
 	private int capacity;
 	private int car_type;
-	private double distance;
-	private double time;//消耗时间
+	private String distance;
+	private String time;//消耗时间
 	private int road_type;
 	private double road_toll; //过路费
 	private String remarks;
@@ -103,19 +103,21 @@ public class Information {
 		this.car_type = car_type;
 	}
 
-	public double getDistance() {
+	
+
+	public String getDistance() {
 		return distance;
 	}
 
-	public void setDistance(double distance) {
+	public void setDistance(String distance) {
 		this.distance = distance;
 	}
 
-	public double getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(double time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
