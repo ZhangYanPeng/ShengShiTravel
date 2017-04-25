@@ -558,7 +558,7 @@ function getInfoView(id) {
 			$$('.info-view-content-start-time').text(data.start_time);
 			$$('.info-view-content-pos').text(data.startpos+'→'+data.destination);
 			if (data.type=='有顺车'){
-                $$('.info-view-item-capacity-row').show();
+                $$('.info-view-item-capacity-row').attr('style','');
                 $$('.info-view-content-capacity').text(data.capacity);
 			}else {
 				$$('.info-view-item-capacity-row').hide();
@@ -619,6 +619,7 @@ function infoFormat(data) {
  */
 function publishInfoSubmit() {
 	var map = new BMap.Map("map");
+	
 	var searchComplete = function (results){
 		if (transit.getStatus() != BMAP_STATUS_SUCCESS){
 			return ;
@@ -641,11 +642,11 @@ function publishInfoSubmit() {
 				if (data == 1) {
 					location.href = baseUrl + 'wx/index.html';
 				} else {
-					alert("发布失败，请检查信息是否填写有误");
+					myApp.alert("发布失败，请检查信息是否填写有误");
 				}
 			},
 			error : function(data) {
-				alert("发布失败，请检查信息是否填写有误");
+				myApp.alert("发布失败，请检查信息是否填写有误");
 			}
 
 		});
@@ -653,8 +654,9 @@ function publishInfoSubmit() {
 	var transit = new BMap.DrivingRoute(map, {renderOptions: {map: map},
 		onSearchComplete: searchComplete,
 		onPolylinesSet: function(){        
-			setTimeout(function(){alert(output)},"1000");
+			setTimeout(function(){myApp.alert(output)},"1000");
 	}});
+
 	transit.search($$("#startpos").val(), $$("#destination").val());
 }
 
@@ -870,7 +872,7 @@ function showPersonalInfo() {
 		},
 		url : "http://localhost:8080/travel/customer/view",
 		error : function(data) {// 请求失败处理函数
-			alert("获取数据失败！");
+			myApp.alert("获取数据失败！");
 		},
 		success : function(data) {
 			var info = data;
